@@ -4,6 +4,10 @@
 
 # Pelayanan Klinik
 Projek ini adalah tugas akhir di semester genap TA2019/2020 mata kuliah pemrogaman framework.
+## Author
+- [Tria Nur Mayasari](https://github.com/triamay)
+- [Anisa Fadilasari](https://github.com/nisafdlsr)
+- [Baskara Dipa A](https://github.com/baskaradipaaa)
 ### ToDo List Pengerjaan Project
 - [ ] Landing page Login (Frontend)
 - [ ] Login Sistem (Backend)
