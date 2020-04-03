@@ -5,6 +5,7 @@ app_name = 'akun' # Be careful setting the name to just /login use userlogin ins
 
 urlpatterns=[
     path('login/',views.login_view,name='login'),
+    path('logout/',views.user_logout,name='user_logout'),
     # path('user_login/',views.user_login,name='user_login'),
     # url(r'^register/$',views.register,name='register'),
     # url(r'^user_login/$',views.user_login,name='user_login'),

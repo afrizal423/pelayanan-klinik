@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, logout, login
 from django.contrib import messages
 from .models import Akun, DataPegawai
+from django.urls import reverse
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.decorators import login_required
 
 def login_view(request):
     if request.POST:
@@ -31,3 +34,8 @@ def login_view(request):
 
     return render(request, 'login.html')
 # Create your views here.
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponse("Berhasil logout !")
