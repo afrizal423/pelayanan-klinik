@@ -5,7 +5,7 @@
 # Pelayanan Klinik
 Projek ini adalah tugas akhir di semester genap TA2019/2020 mata kuliah pemrogaman framework.
 ## Author
-- [Afrizla Muhammad Yasin](https://github.com/afrizal423)
+- [Afrizal Muhammad Yasin](https://github.com/afrizal423)
 - [Tria Nur Mayasari](https://github.com/triamay)
 - [Anisa Fadilasari](https://github.com/nisafdlsr)
 - [Baskara Dipa A](https://github.com/baskaradipaaa)
