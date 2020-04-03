@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url,include
+
+admin.site.site_header="Sistem Pelayanan Klinik"
+admin.site.site_title="AdminPortal | Sistem Pelayanan Klinik"
+admin.site.index_title="Selamat datang di Sistem Pelayanan Klinik"
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('akun/', include('akun.urls')),
 ]
