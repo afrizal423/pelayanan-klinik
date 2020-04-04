@@ -25,6 +25,8 @@ def login_view(request):
                     return redirect('/dokter/index') # sudah login ini
                 elif request.session['jenis_akun'] == "pegawai_admin": 
                     return redirect('/pegawaiadmin/index') # sudah login ini
+                elif request.session['jenis_akun'] == "pegawai_apotek": 
+                    return redirect('/apoteker/index') # sudah login ini
 
                 # return redirect('/akun') # sudah login ini
             else:   

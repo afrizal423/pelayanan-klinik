@@ -11,7 +11,7 @@ Projek ini adalah tugas akhir di semester genap TA2019/2020 mata kuliah pemrogam
 - [Baskara Dipa A](https://github.com/baskaradipaaa)
 ### ToDo List Pengerjaan Project
 - [ ] Landing page Login (Frontend)
-- [x] Login Sistem (Login sudah bisa, tinggal decorated pada setiap app) (Backend) 
+- [x] Login Sistem (Status: <b>Fix clear</b>) 
 - [ ] Landing page dashboard admin (Frontend)
 - [ ] Landing page dashboard untuk pencatatan antrian (Frontend)
 - [ ] Landing page dashboard untuk edit antrian (Frontend)

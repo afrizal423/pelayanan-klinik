@@ -1,5 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+class User(AbstractUser):
+    is_pegawaiadmin = models.BooleanField(default=False)
+    is_dokter = models.BooleanField(default=False)
+    is_apoteker = models.BooleanField(default=False)
 
 # Create your models here.
 class DataPegawai(models.Model):
@@ -32,6 +37,9 @@ class Akun (models.Model):
     akun = models.ForeignKey(User,on_delete=models.CASCADE)
     pegawai = models.ForeignKey(DataPegawai,on_delete=models.CASCADE)
     jenis_akun = models.CharField(max_length=20, choices=JENIS_AKUN_CHOICES)
+    is_pegawaiadmin = models.BooleanField(default=False)
+    is_dokter = models.BooleanField(default=False)
+    is_apoteker = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.DataPegawai.nama
