@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'akun',
+    'apoteker',
+    'dokter',
+    'pegawaiadmin'
 ]
 
 MIDDLEWARE = [

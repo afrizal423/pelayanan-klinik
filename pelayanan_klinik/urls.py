@@ -24,9 +24,9 @@ admin.site.index_title="Selamat datang di Sistem Pelayanan Klinik"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('akun/', include('akun.urls')),
-    path('pegawaiadmin/', include('pegawaiadmin.urls')),
-    path('dokter/', include('dokter.urls')),
-    path('apoteker/', include('apoteker.urls')),
+    path('akun/', include('akun.urls',namespace="akun")),
+    path('pegawaiadmin/', include('pegawaiadmin.urls',namespace="pegawaiadmin")),
+    path('dokter/', include('dokter.urls',namespace="dokter")),
+    path('apoteker/', include('apoteker.urls',namespace="apoteker")),
 
 ]

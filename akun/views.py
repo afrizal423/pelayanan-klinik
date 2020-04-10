@@ -40,4 +40,5 @@ def login_view(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return HttpResponse("Berhasil logout !")
+    return redirect('/akun/login')
+    # return HttpResponse("Berhasil logout !")
