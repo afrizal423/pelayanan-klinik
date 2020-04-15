@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<htmL>
+    <head>
+        <title>Mini HRD</title>
+    </head>
+    <body>
+        <h1>Silahkan Login</h1>
+        <form method="POST">
+            {% csrf_token %}
+
+            {% if messages %}
+              <ul>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            <p>Username: <input type="text" name="username" value="" placeholder="silahkan masukkan username..." /></p>
+            <p>Password: <input type="password" name="password" value="" placeholder="silahkan masukkan password..." /></p>
+            <p><input type="submit" value="Log In" /></p>
+        </form>
+    </body>
+</htmL>

@@ -10,7 +10,7 @@ Projek ini adalah tugas akhir di semester genap TA2019/2020 mata kuliah pemrogam
 - [Anisa Fadilasari](https://github.com/nisafdlsr)
 - [Baskara Dipa A](https://github.com/baskaradipaaa)
 ### ToDo List Pengerjaan Project
-- [ ] Landing page Login (Frontend)
+- [x] Landing page Login (Frontend) (Status: <b>Fix clear</b>
 - [x] Login Sistem (Status: <b>Fix clear</b>) 
 - [ ] Landing page dashboard admin (Frontend)
 - [ ] Landing page dashboard untuk pencatatan antrian (Frontend)

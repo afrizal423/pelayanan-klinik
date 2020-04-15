@@ -1,0 +1,105 @@
+body {
+	margin: 0;
+	padding: 0;
+	background: url(/static/login/klinik.jpg);
+	background-size: 100% 100%:
+	-webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+   	-o-background-size: 100% 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	font-family: sans-serif;
+}
+
+.login{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background: rgb(0, 0, 0, 0.5);
+	padding: 30px 20px;
+	width: 300px;
+	box-shadow: 0 0 10px 5px black;
+}
+
+.avatar{
+	font-size: 50px;
+	background: #bdc3c7;
+	width: 80px;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	position: fixed;
+	left: 50%;
+	top: 0;
+	transform: translate(-50%, -50%);
+	border-radius: 50%;
+}
+
+.login h2{
+	text-align: center;
+	color: white;
+	padding-top: 10px;
+	letter-spacing: 5px;
+}
+
+.box-login{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 15px;
+	border-bottom: 2px solid white;
+	padding: 8px 0;
+}
+
+.box-login i{
+	font-size: 20px;
+	color: white;
+	background-position: center; 
+}
+
+.box-login input{
+	width: 100%;
+	padding: 0 10px;
+	background: none;
+	border: none;
+	outline: none;
+	color: white;
+	font-size: 18px;
+}
+
+.box-login input::placeholder{
+	color: white;
+}
+
+.btn-login{
+	width: 100%;
+	background: none;
+	padding: 15px;
+	border: 1px solid white;
+	font-size: 18px;
+	letter-spacing: 5px;
+	color: white;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.btn-login:hover{
+	background: rgb(0, 0, 0, 0.8);
+}
+
+.buttom{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+}
+
+.buttom a{
+	color: white;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.buttom a:hover{
+	text-decoration: underline;
+}    
