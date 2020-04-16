@@ -62,7 +62,7 @@ Apotek | Mengelola data biaya obat(akan diteruskan ke pembayaran di pegawai admi
 - pegawai admin akan mengecek semua data dari dokter maupun apotek
 - pegawai admin memanggil pasien untuk pembayaran
 - pasien akan akan membayar
-- <b><i>Jika pasien adalah dari poli gigi</i></b> maka setelah selesai pembayaran bisa meninggalkan klik <b>(proses selesai)</b>
+- <b><i>Jika pasien adalah dari poli gigi</i></b> maka setelah selesai pembayaran bisa meninggalkan klinik <b>(proses selesai)</b>
 - pasien akan diberikan sebuah nota yang akan dikasih ke apotek
 - apotek akan melihat nota tersebut dan memberikan obatnya
 - pasien meninggalkan klinik
