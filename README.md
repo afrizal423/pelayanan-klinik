@@ -18,7 +18,7 @@ Projek ini adalah tugas akhir di semester genap TA2019/2020 mata kuliah pemrogam
 ### Action Setiap User :paperclip:
 User  | Aksi
 ------------- | -------------
-Pegawai admin  | Mengelola akun user(peagwai klinik)
+Pegawai admin  | Mengelola akun user(pegawai klinik)
 Pegawai admin  | Mengelola biodata user(pegawai klinik)
 Pegawai admin  | Mengelola data pasien
 Pegawai admin  | Mengelola antrian pasien
@@ -44,7 +44,7 @@ Apotek | Mengelola data biaya obat(akan diteruskan ke pembayaran di pegawai admi
 - Poli Umum
 - Poli Gigi
 
-### Alur dari program :gem:
+### Workflow :gem:
 - pasien datang ke klinik
 - pasien datang lalu menuju ke pendaftaran (pegawai admin)
 - pegawai admin akan mencatat keluhan / gejala pasien 
