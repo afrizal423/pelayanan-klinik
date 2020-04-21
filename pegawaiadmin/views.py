@@ -5,4 +5,9 @@ from pegawaiadmin.decorators import pegawaiadmin_area
 # Create your views here.
 @pegawaiadmin_area
 def index(request):
-    return HttpResponse("You are logged in ! Pegawai ADmin Area!!")
+    print(request.session['username'])
+    data = {
+        'sessionnya' : request.session['jenis_akun'],
+        'namaakun' : request.session['namapegawai']
+    }
+    return render(request, 'admin/base.html', data)

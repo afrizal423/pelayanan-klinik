@@ -16,6 +16,7 @@ def login_view(request):
                     login(request, user)
 
                     request.session['pegawai_id'] = akun.pegawai.id
+                    request.session['namapegawai'] = akun.pegawai.nama
                     request.session['jenis_akun'] = akun.jenis_akun
                     request.session['username'] = request.POST['username']
                 except:
