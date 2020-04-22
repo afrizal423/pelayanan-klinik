@@ -17,7 +17,7 @@
         <!-- Favicon -->
         <link
             rel="icon"
-            href="{% static 'admin/img/brand/favicon.png' %}"
+            href="{% static 'hal_admin/img/brand/favicon.png' %}"
             sizes="32x32">
 
         <!-- Fonts -->
@@ -27,17 +27,17 @@
         <!-- Icons -->
         <link
             rel="stylesheet"
-            href="{% static 'admin/vendor/nucleo/css/nucleo.css' %} "
+            href="{% static 'hal_admin/vendor/nucleo/css/nucleo.css' %} "
             type="text/css">
         <link
             rel="stylesheet"
-            href="{% static 'admin/vendor/@fortawesome/fontawesome-free/css/all.min.css' %} "
+            href="{% static 'hal_admin/vendor/@fortawesome/fontawesome-free/css/all.min.css' %} "
             type="text/css">
         <!-- Page plugins -->
         <!-- Argon CSS -->
         <link
             rel="stylesheet"
-            href="{% static 'admin/css/argon.css' %} "
+            href="{% static 'hal_admin/css/argon.css' %} "
             type="text/css">
         <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -60,7 +60,7 @@
                     <a class="navbar-brand" href="{% url 'pegawaiadmin:index_pegawaiadmin' %}">
                     {% endif %}
                         <img
-                            src="{% static 'admin/img/brand/blue.png' %}"
+                            src="{% static 'hal_admin/img/brand/blue.png' %}"
                             class="navbar-brand-img"
                             alt="Fasilkom">
                     </a>
@@ -305,7 +305,7 @@
                                     aria-expanded="false">
                                     <div class="media align-items-center">
                                         <span class="avatar avatar-sm rounded-circle">
-                                            <img alt="Image placeholder" src="{% static 'admin/img/brand/favicon.png' %}">
+                                            <img alt="Image placeholder" src="{% static 'hal_admin/img/brand/favicon.png' %}">
                                         </span>
                                         <div class="media-body ml-2 d-none d-lg-block">
                                             <span class="mb-0 text-sm  font-weight-bold">{{ namaakun }}</span>
@@ -381,27 +381,27 @@
             <!-- Argon Scripts -->
             <!-- Core -->
 
-            <script src="{% static 'admin/vendor/jquery/dist/jquery.min.js' %}"></script>
+            <script src="{% static 'hal_admin/vendor/jquery/dist/jquery.min.js' %}"></script>
             <script
-                src=" {% static 'admin/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %} "></script>
-            <script src="{% static 'admin/vendor/js-cookie/js.cookie.js' %} "></script>
+                src=" {% static 'hal_admin/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %} "></script>
+            <script src="{% static 'hal_admin/vendor/js-cookie/js.cookie.js' %} "></script>
             <script
-                src="{% static 'admin/vendor/jquery.scrollbar/jquery.scrollbar.min.js' %} "></script>
+                src="{% static 'hal_admin/vendor/jquery.scrollbar/jquery.scrollbar.min.js' %} "></script>
             <script
-                src="{% static 'admin/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
+                src="{% static 'hal_admin/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js' %}"></script>
             <!-- Optional JS -->
             <!-- @yield('script') -->
             {% block script %}{% endblock script %}
-            <script src="{% static 'admin/vendor/chart.js/dist/Chart.min.js' %}"></script>
-            <script src="{% static 'admin/vendor/chart.js/dist/Chart.extension.js' %} "></script>
+            <script src="{% static 'hal_admin/vendor/chart.js/dist/Chart.min.js' %}"></script>
+            <script src="{% static 'hal_admin/vendor/chart.js/dist/Chart.extension.js' %} "></script>
             <script
-                src="{% static 'admin/vendor/jvectormap-next/jquery-jvectormap.min.js' %} "></script>
+                src="{% static 'hal_admin/vendor/jvectormap-next/jquery-jvectormap.min.js' %} "></script>
             <script
-                src="{% static 'admin/js/vendor/jvectormap/jquery-jvectormap-world-mill.js' %}"></script>
+                src="{% static 'hal_admin/js/vendor/jvectormap/jquery-jvectormap-world-mill.js' %}"></script>
             <!-- Argon JS -->
-            <script src="{% static 'admin/js/argon.js' %} "></script>
+            <script src="{% static 'hal_admin/js/argon.js' %} "></script>
             <!-- Demo JS - remove this in your project -->
-            <script src="{% static 'admin/js/demo.min.js' %} "></script>
+            <script src="{% static 'hal_admin/js/demo.min.js' %} "></script>
             <!-- @yield('script-dashboard') -->
             {% block script_dashboard %}{% endblock script_dashboard %}
         </body>
