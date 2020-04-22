@@ -12,7 +12,7 @@ def index(request):
         'sessionnya' : request.session['jenis_akun'],
         'namaakun' : request.session['namapegawai']
     }
-    return render(request, 'hal_admin/base.html', data)
+    return render(request, 'hal_admin/apoteker/home.html', data)
 
 @apoteker_area
 def index_obat(request):
