@@ -7,12 +7,23 @@ from apoteker.forms import ObatForm
 # Create your views here.
 @apoteker_area
 def index(request):
+    print(request.session['username'])
+    data = {
+        'sessionnya' : request.session['jenis_akun'],
+        'namaakun' : request.session['namapegawai']
+    }
+    return render(request, 'hal_admin/base.html', data)
+
+@apoteker_area
+def index_obat(request):
     hasil = Obat.objects.all()
     # print(hasil) ## untuk lihat hasilnya silahkan liat diterminal
     data = {
         'data':hasil,
+        'sessionnya' : request.session['jenis_akun'],
+        'namaakun' : request.session['namapegawai'],
     }   
-    return render(request, 'apoteker/index.html',data)
+    return render(request, 'hal_admin/apoteker/index.html',data)
     # return HttpResponse("You are logged in ! Apoteker area")
 
 @apoteker_area
@@ -22,12 +33,14 @@ def tambah_obat(request):
         if form.is_valid():
             form.save()
             # print("suksessssssssssssssssssssss")
-            return redirect("/apoteker/index")
+            return redirect("/apoteker/dtobat")
         pass
     data = {
         'form':ObatForm(),
+        'sessionnya' : request.session['jenis_akun'],
+        'namaakun' : request.session['namapegawai'],
     }   
-    return render(request, 'apoteker/tambahobat.html',data)
+    return render(request, 'hal_admin/apoteker/tambahobat.html',data)
 
 @apoteker_area
 def edit_obat(request, id):
@@ -39,14 +52,16 @@ def edit_obat(request, id):
     # redirect to detail_view 
     if form.is_valid(): 
         form.save() 
-        return redirect("/apoteker/index/")  
+        return redirect("/apoteker/dtobat/")  
     data = {
-        'form':form,
+        'data':obj,
+        'sessionnya' : request.session['jenis_akun'],
+        'namaakun' : request.session['namapegawai'],
     }   
-    return render(request, 'apoteker/editobat.html',data)
+    return render(request, 'hal_admin/apoteker/editobat.html',data)
 
 @apoteker_area
 def hapus_obat(request, id):
     dt = Obat.objects.get(id=id)
     dt.delete()
-    return redirect("/apoteker/index/")
+    return redirect("/apoteker/dtobat/")

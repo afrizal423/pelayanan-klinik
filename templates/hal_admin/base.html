@@ -93,7 +93,7 @@
                                     {% elif sessionnya == "dokter" %}
                                     <a class="nav-link" href="{% url 'pegawaiadmin:index_pegawaiadmin' %}">
                                         {% elif sessionnya == "pegawai_apotek" %}
-                                        <a class="nav-link" href="{% url 'pegawaiadmin:index_pegawaiadmin' %}">
+                                        <a class="nav-link" href="{% url 'apoteker:index_apoteker' %}">
                                             {% endif %}
                                     <i class="ni ni-shop text-primary"></i>
                                     <span class="nav-link-text">Dashboards</span>
@@ -136,7 +136,7 @@
                                 <div class="collapse" id="navbar-pas">
                                     <ul class="nav nav-sm flex-column">
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">Data Pasien</a>
+                                            <a href="{% url 'pegawaiadmin:index_pasien' %}" class="nav-link">Data Pasien</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">Rekam Medis (Riwayat)</a>
@@ -152,6 +152,25 @@
                             </li>
                             {% elif sessionnya == "dokter" %}
                             {% elif sessionnya == "pegawai_apotek" %}
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="#navbar-pegawai"
+                                    data-toggle="collapse"
+                                    role="button"
+                                    aria-expanded="false"
+                                    aria-controls="navbar-mhs">
+                                    <i class="fas fa-capsules text-red"></i>
+                                    <span class="nav-link-text">Obat</span>
+                                </a>
+                                <div class="collapse" id="navbar-pegawai">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="{% url 'apoteker:index_obat' %}" class="nav-link">Data Obat</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
                             {% endif %}
 <!--                             
                             <li class="nav-item">

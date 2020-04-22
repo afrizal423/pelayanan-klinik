@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'akun',
     'apoteker',
     'dokter',
-    'pegawaiadmin'
+    'pegawaiadmin',
+    'pasien'
 ]
 
 MIDDLEWARE = [
@@ -119,7 +120,7 @@ AUTH_USER_MODEL = 'akun.User'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Jakarta'
 
 USE_I18N = True
 
@@ -127,6 +128,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# lama loginnya 1 jam
+# SESSION_COOKIE_AGE = 60*60
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
