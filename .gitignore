@@ -1,3 +1,9 @@
 *.pyc
 !spec/*.pyc
 coba.py
+static/admin/
+pegawaiadmin/migrations
+pasien/migrations
+dokter/migrations
+apoteker/migrations
+akun/migrations
