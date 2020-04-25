@@ -22,6 +22,10 @@ def tambah_pasien(request):
     form = PasienForm(request.POST or None, request.FILES or None)
     if request.method == 'POST':
         if form.is_valid():
+            # ps = Pasien()
+            # ps.namapasien = request.POST['namapasien']
+            # ps.save()
+            # print(request.POST['namapasien'])
             form.save()
             # print("suksessssssssssssssssssssss")
             return redirect("/pegawaiadmin/dtpasien/")

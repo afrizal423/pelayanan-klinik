@@ -34,6 +34,7 @@
             href="{% static 'hal_admin/vendor/@fortawesome/fontawesome-free/css/all.min.css' %} "
             type="text/css">
         <!-- Page plugins -->
+        {% block header %}{% endblock header %}
         <!-- Argon CSS -->
         <link
             rel="stylesheet"
@@ -42,7 +43,7 @@
         <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-        {% block header %}{% endblock header %}
+       
     </head>
     <body>
         <!-- Sidenav -->
@@ -57,7 +58,7 @@
                     {% elif sessionnya == "dokter" %}
                     <a class="navbar-brand" href="{% url 'pegawaiadmin:index_pegawaiadmin' %}">
                     {% elif sessionnya == "pegawai_apotek" %}
-                    <a class="navbar-brand" href="{% url 'pegawaiadmin:index_pegawaiadmin' %}">
+                    <a class="navbar-brand" href="{% url 'apoteker:index_apoteker' %}">
                     {% endif %}
                         <img
                             src="{% static 'hal_admin/img/brand/blue.png' %}"
@@ -143,6 +144,12 @@
                                         </li>
                                     </ul>
                                 </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'pegawaiadmin:index_antrian' %}">
+                                    <i class="fas fa-person-booth text-red"></i>
+                                    <span class="nav-link-text">Pendaftaran Antrian</span>
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">

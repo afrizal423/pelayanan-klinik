@@ -4,9 +4,13 @@ from pasien.models import Pasien
 # Create your models here.
 
 class Pendaftaran(models.Model):
+    POLI_CHOICES = (
+        ('Poli Umum', 'Poli Umum'),
+        ('Poli Gigi', 'Poli Gigi'),
+    )
     norm = models.ForeignKey(Pasien, on_delete=models.CASCADE)
-    gejalaawal = models.CharField(max_length=200)
-    tujuanpoli = models.CharField(max_length=50)
+    gejalaawal = models.TextField()
+    tujuanpoli = models.CharField(max_length=20, blank = True, null = True, choices=POLI_CHOICES)
     tglantrian = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now= True)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -15,7 +19,7 @@ class Pendaftaran(models.Model):
         ordering = ['-created_on']
 
     def __str__(self):
-        return self.norm
+        return self.norm.namapasien
 
 class Antrian(models.Model):
     STATUSNYA_CHOICES = (
@@ -28,6 +32,8 @@ class Antrian(models.Model):
     statusdokter = models.CharField(max_length=10, blank = True, null = True, choices=STATUSNYA_CHOICES)
     statusapoteker = models.CharField(max_length=10, blank = True, null = True, choices=STATUSNYA_CHOICES)
     # statusdokter = models.CharField(max_length=10, blank = True, null = True, choices=STATUSNYA_CHOICES)
+    is_dokterumum = models.BooleanField(default=False)
+    is_doktergigi = models.BooleanField(default=False)
     updated_on = models.DateTimeField(auto_now= True)
     created_on = models.DateTimeField(auto_now_add=True)
 
