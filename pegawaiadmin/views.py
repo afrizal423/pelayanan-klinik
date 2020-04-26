@@ -29,6 +29,9 @@ def antrian(request):
 def tbantrian(request):
     hasil = Pasien.objects.all().order_by('-created_on')
     formdaftar = PendaftaranForm(request.POST or None, request.FILES or None)
+    df = Pendaftaran.objects.all().select_related('norm','antrian').filter(created_on__contains=date.today()).order_by('-created_on')
+
+    print(df.count())
     if request.method == 'POST':
         # if formdaftar.is_valid():
             # formdaftar.save()
@@ -37,12 +40,38 @@ def tbantrian(request):
         daftar.norm=Pasien.objects.get(id=request.POST['norm rekammedik'])
         daftar.tujuanpoli=request.POST['tujuanpoli']
         daftar.gejalaawal=request.POST['gejalaawal']
-        # daftar.save()
-        ant = Antrian()
-        print(daftar.tujuanpoli)
-        # return redirect("/pegawaiadmin/antrian/")
+        # ant = Antrian()
+        if df.count() == 0 :
+            print("Kosong")
+            counter = 1
+            daftar.save()
+            ant = Antrian(idpendaftaran=daftar, noantrian=counter)
+            # ant.idpendaftaran=daftar
+            # ant.noantrian=counter
+            if  daftar.tujuanpoli == "Poli Umum":
+                ant.is_dokterumum=True
+                ant.statusdokter="belum"
+            elif daftar.tujuanpoli == "Poli Gigi":
+                ant.is_doktergigi=True
+                ant.statusapoteker="belum"
+            ant.save()
+        else:
+            daftar.save()
+            nolama = Antrian.objects.all().filter(created_on__contains=date.today()).order_by('-created_on')
+            print(nolama.first().noantrian + 1)
+            counter = nolama.first().noantrian + 1
+            ant = Antrian(idpendaftaran=daftar, noantrian=counter)
+            if  daftar.tujuanpoli == "Poli Umum":
+                ant.is_dokterumum=True
+                ant.statusdokter="belum"
+            elif daftar.tujuanpoli == "Poli Gigi":
+                ant.is_doktergigi=True
+                ant.statusapoteker="belum"
+            ant.save()
+        # print(daftar.tujuanpoli)
+        return redirect("/pegawaiadmin/antrian/")
 
-    print("gagal formnya")
+    # print("gagal formnya")
         
     data = {
         'sessionnya' : request.session['jenis_akun'],

@@ -61,32 +61,29 @@
                     <table class="table table-flush" id="datatable-buttons">
                         <thead class="thead-light">
                             <tr>
+                                <th>No Antrian</th>
                                 <th>No RM</th>
                                 <th>Nama Pasien</th>
-                                <th>Alamat Pasien</th>
-                                <th>TTL</th>
-                                <th>No Telp</th>
+                                <th>Tujuan Poli</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>No Antrian</th>
                                 <th>No RM</th>
                                 <th>Nama Pasien</th>
-                                <th>Alamat Pasien</th>
-                                <th>TTL</th>
-                                <th>No Telp</th>
+                                <th>Tujuan Poli</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             {% for ps in data %}
                             <tr>
+                                <td>{{ps.antrian.noantrian}}</td>
                                 <td>{{ps.norm.norm}}</td>
                                 <td>{{ps.norm.namapasien}}</td>
                                 <td>{{ps.tujuanpoli}}</td>
-                                <td>{{ps.ttl}}</td>
-                                <td>{{ps.notelp}}</td>
                                 <td>
                                     <!-- <input type="button" class="btn btn-outline-warning" onclick="location.href='{% url 'pegawaiadmin:editpasien' ps.id  %}'" value=" Edit" />
                                     <a type="button" class="btn btn-outline-danger" href="{% url 'pegawaiadmin:hapuspasien' ps.id  %}" onclick="return confirm('Anda yakin mau menghapus data ini?');">Delete</a> -->
