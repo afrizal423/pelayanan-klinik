@@ -31,7 +31,7 @@ def tbantrian(request):
     formdaftar = PendaftaranForm(request.POST or None, request.FILES or None)
     df = Pendaftaran.objects.all().select_related('norm','antrian').filter(created_on__contains=date.today()).order_by('-created_on')
 
-    print(df.count())
+    # print(isgigi.query)
     if request.method == 'POST':
         # if formdaftar.is_valid():
             # formdaftar.save()
@@ -53,18 +53,31 @@ def tbantrian(request):
                 ant.statusdokter="belum"
             elif daftar.tujuanpoli == "Poli Gigi":
                 ant.is_doktergigi=True
-                ant.statusapoteker="belum"
+                ant.statusdokter="belum"
             ant.save()
         else:
             daftar.save()
-            nolama = Antrian.objects.all().filter(created_on__contains=date.today()).order_by('-created_on')
-            print(nolama.first().noantrian + 1)
-            counter = nolama.first().noantrian + 1
-            ant = Antrian(idpendaftaran=daftar, noantrian=counter)
+            # nolama = Antrian.objects.all().filter(created_on__contains=date.today()).order_by('-created_on')
             if  daftar.tujuanpoli == "Poli Umum":
+                nolama = Antrian.objects.all().filter(created_on__contains=date.today(),is_dokterumum=True).order_by('-created_on')
+            elif daftar.tujuanpoli == "Poli Gigi":
+                nolama = Antrian.objects.all().filter(created_on__contains=date.today(),is_doktergigi=True).order_by('-created_on')
+            print(nolama.first())
+            ant = Antrian(idpendaftaran=daftar)
+            if  daftar.tujuanpoli == "Poli Umum" :
+                if nolama.count() == 0:
+                    counter=1
+                elif nolama.count() > 0:
+                    counter = nolama.first().noantrian + 1
+                ant.noantrian=counter
                 ant.is_dokterumum=True
                 ant.statusdokter="belum"
-            elif daftar.tujuanpoli == "Poli Gigi":
+            elif daftar.tujuanpoli == "Poli Gigi" :
+                if nolama.count() == 0:
+                    counter=1
+                elif nolama.count() > 0:
+                    counter = nolama.first().noantrian + 1
+                ant.noantrian=counter
                 ant.is_doktergigi=True
                 ant.statusapoteker="belum"
             ant.save()
