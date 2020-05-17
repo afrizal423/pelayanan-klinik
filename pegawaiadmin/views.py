@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse
 from pegawaiadmin.decorators import pegawaiadmin_area
 from pegawaiadmin.models import Pendaftaran, Antrian
+from dokter.models import RekamMedis
 from datetime import date
 from pasien.models import Pasien
 from pegawaiadmin.forms import AntrianForm, PendaftaranForm
@@ -46,6 +47,7 @@ def tbantrian(request):
             counter = 1
             daftar.save()
             ant = Antrian(idpendaftaran=daftar, noantrian=counter)
+
             # ant.idpendaftaran=daftar
             # ant.noantrian=counter
             if  daftar.tujuanpoli == "Poli Umum":
@@ -55,6 +57,8 @@ def tbantrian(request):
                 ant.is_doktergigi=True
                 ant.statusdokter="belum"
             ant.save()
+            rm = RekamMedis(idpendaftaran=daftar, idantrian=ant)
+            rm.save()
         else:
             daftar.save()
             # nolama = Antrian.objects.all().filter(created_on__contains=date.today()).order_by('-created_on')
@@ -81,6 +85,8 @@ def tbantrian(request):
                 ant.is_doktergigi=True
                 ant.statusapoteker="belum"
             ant.save()
+            rm = RekamMedis(idpendaftaran=daftar, idantrian=ant)
+            rm.save()
         # print(daftar.tujuanpoli)
         return redirect("/pegawaiadmin/antrian/")
 

@@ -4,9 +4,9 @@ from akun.models import User
 # Create your models here.
 class RekamMedis(models.Model):
     idantrian = models.ForeignKey(Antrian,on_delete=models.CASCADE)
-    iddokter = models.ForeignKey(User,on_delete=models.CASCADE)
+    iddokter = models.ForeignKey(User,blank = True, null = True,on_delete=models.CASCADE)
     idpendaftaran = models.ForeignKey(Pendaftaran, on_delete=models.CASCADE)
-    diagnosa = models.TextField()
+    diagnosa = models.TextField(blank = True, null = True,)
     updated_on = models.DateTimeField(auto_now= True)
     created_on = models.DateTimeField(auto_now_add=True)
 

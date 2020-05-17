@@ -83,7 +83,7 @@
                           <!-- <input class="form-control" maxlength="15" required name="notelp" type="tel" placeholder="40-(770)-888-444" > -->
                           <select class="form-control" id="example-norm" name="norm rekammedik" required data-toggle="select">
                             {% for ps in data %}
-                            <option value="{{ps.id}}">{{ps.norm}}</option>
+                            <option value="{{ps.id}}">{{ps.norm}} | {{ps.namapasien}}</option>
                             {% endfor %}
                           </select>
                         </div>

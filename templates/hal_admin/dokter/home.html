@@ -1,0 +1,70 @@
+{% extends "hal_admin/base.html" %}{% load static %}
+
+{% block title %}
+    Halaman Dokter
+{% endblock title %}
+{% block header %}
+    <link
+        rel="stylesheet"
+        href="{% static 'hal_admin/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %} ">
+    <link
+        rel="stylesheet"
+        href="{% static 'hal_admin/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %} "> 
+    <link
+        rel="stylesheet"
+        href="{% static 'hal_admin/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css' %} "> 
+{% endblock header %}
+    {% block konten %}
+
+       <!-- Header -->
+<div class="header bg-primary ">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Dashboard Dokter</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'pegawaiadmin:index_pegawaiadmin' %}">
+                                    <i class="fas fa-home"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Dashboards</li>
+                        </ol>
+                    </nav>
+                </div>
+                <!-- <div class="col-lg-6 col-5 text-right">
+                    <a
+                        href="{% url 'apoteker:tambah_obatnya' %}"
+                        class="btn btn-sm btn-neutral">Tambah Data Obat</a>
+                    <!--  --
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container text-center">
+    <h2>
+        Selamat datang di halaman Dokter dr.{{ namaakun }}, Semoga harimu menyenangkan. 😊️
+    </h2>
+</div>
+    <!-- Argon Scripts -->
+
+    {% endblock konten %}
+
+{% block script %}
+<script src="{% static 'hal_admin/vendor/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-select/js/dataTables.select.min.js' %}"></script>
+<script src="{% static 'hal_admin/js/demo.min.js' %}"></script>
+
+
+
+{% endblock script %}

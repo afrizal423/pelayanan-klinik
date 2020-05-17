@@ -158,6 +158,12 @@
                                 </a>
                             </li>
                             {% elif sessionnya == "dokter" %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'dokter:antrian_pasien' %}">
+                                    <i class="fas fa-users text-red"></i>
+                                    <span class="nav-link-text">Antrian Pemeriksaan</span>
+                                </a>
+                            </li>
                             {% elif sessionnya == "pegawai_apotek" %}
                             <li class="nav-item">
                                 <a
