@@ -11,7 +11,7 @@ class Pendaftaran(models.Model):
     norm = models.ForeignKey(Pasien, on_delete=models.CASCADE)
     gejalaawal = models.TextField()
     tujuanpoli = models.CharField(max_length=20, blank = True, null = True, choices=POLI_CHOICES)
-    tglantrian = models.DateTimeField(auto_now_add=True)
+    tglantrian = models.DateTimeField()
     updated_on = models.DateTimeField(auto_now= True)
     created_on = models.DateTimeField(auto_now_add=True)
 
