@@ -85,8 +85,8 @@
                                 <td>{{ps.idpendaftaran.norm.namapasien}}</td>
                                 <!-- <td>{{ps.tujuanpoli}}</td> -->
                                 <td>
-                                    <!-- <input type="button" class="btn btn-outline-warning" onclick="location.href='{% url 'pegawaiadmin:editpasien' ps.id  %}'" value=" Edit" />
-                                    <a type="button" class="btn btn-outline-danger" href="{% url 'pegawaiadmin:hapuspasien' ps.id  %}" onclick="return confirm('Anda yakin mau menghapus data ini?');">Delete</a> -->
+                                   <input type="button" class="btn btn-primary" onclick="location.href='{% url 'dokter:periksa_pasien' ps.id  %}'" value="Periksa Pasien" />
+                                    <!--  <a type="button" class="btn btn-outline-danger" href="{% url 'pegawaiadmin:hapuspasien' ps.id  %}" onclick="return confirm('Anda yakin mau menghapus data ini?');">Delete</a> -->
                                     
                                   </td>                               
                             </tr>
