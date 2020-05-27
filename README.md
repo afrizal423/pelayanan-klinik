@@ -110,9 +110,13 @@ Install requirements menggunakan [pip](https://pip.pypa.io/en/stable/).
 pip install -r requirements.txt
 ```
 Buat database di phpmyadmin / sejenisnya dengan nama database pelayanan_klinik <br>
-Lalu buka terminal, jalankan dengan perintah
+Buka terminal untuk collectstatic
+```bash
+python manage.py collectstatic 
+```
+tetap pada terminal, jalankan dengan perintah
 ```bash
 python manage.py migrate && python manage.py runserver
 ```
 ## Demo <br>
-[Coming soon](https://dj.afrizalmy.com)<br>
+[Demo in here](https://klinik.dj.afrizalmy.com/)<br>
