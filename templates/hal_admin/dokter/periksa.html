@@ -53,7 +53,7 @@
             <div class="card">
                 <!-- Card header -->
                 <div class="card-header">
-                  <h3 class="mb-0">Edit Data Pasien Baru</h3>
+                  <h3 class="mb-0">Edit Data Pasien Baru{{ request.get_full_path }} </h3>
                 </div>
                 <!-- Card body -->
                 <div class="card-body">
@@ -117,42 +117,36 @@
                           });
                           
                           </script>
+                        <input hidden name="id_periksa" class="form-control" type="text" value="{{ data.id }}" >
                         <input class="form-control" id="cari" name="q"  type="text" placeholder="Cari obat disini">
                         <div class="card bg-primary">
                           <div id="results"></div>
                        </div>
+                       {% if pesanan|length %}
                         <table class="table">
                           <thead>
                             <tr>
-                              <th scope="col">#</th>
-                              <th scope="col">First</th>
-                              <th scope="col">Last</th>
+                              <th scope="col">Nama Obat</th>
                               <th scope="col">Handle</th>
                             </tr>
                           </thead>
                           <tbody>
+                            {% for r in pesanan %}
                             <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                            </tr>                            
+                              <td>{{ r.nama_obat }}</td>
+                              <td><a type="button" class="btn btn-outline-danger" href="{% url 'dokter:hapus_obat' r.id  %}" onclick="return confirm('Anda yakin mau menghapus data ini?');">Hapus Obat</a>
+                              </td>
+                            </tr>
+                            {% endfor %}                            
                           </tbody>
                         </table>
+                        {% else %}
+                        <div class="note text-white">
+                        Your search yielded no results
+                        </div>
+                        {% endif %}
                       </div>
                   </div> 
-                    <div class="form-group row">
-                        <label for="example-date-input" class="col-md-2 col-form-label form-control-label">Tanggal Lahir</label>
-                        <div class="col-md-10">
-                          <input class="form-control"  name="ttl" required type="date" value="{{ data.ttl|date:'Y-m-d' }}" placeholder="2018-11-23" id="example-date-input">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="example-tel-input" class="col-md-2 col-form-label form-control-label">No Telp Pasien</label>
-                        <div class="col-md-10">
-                          <input class="form-control" maxlength="15" required name="notelp" value="{{ data.notelp }}" type="tel" placeholder="40-(770)-888-444" id="example-tel-input">
-                        </div>
-                    </div> 
                     <button class="btn btn-primary" type="submit">Simpan</button>
 
                   </form>

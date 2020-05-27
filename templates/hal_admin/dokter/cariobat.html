@@ -13,7 +13,8 @@
 	<tr>
 		<td>{{ r.nama_obat }}</td>
 		<td>{{ r.stok_obat }}</td>
-		<td></td>
+		<td><input type="button" class="btn btn-outline-warning" onclick="location.href='{% url 'dokter:tambah_obat' r.id  %}'" value=" Pilih Obat" />
+		</td>
 	</tr>
 	{% endfor %}
 	</table>
