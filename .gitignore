@@ -2,6 +2,7 @@
 !spec/*.pyc
 coba.py
 static/admin/
+static/admin-lte/
 pegawaiadmin/migrations
 pasien/migrations
 dokter/migrations

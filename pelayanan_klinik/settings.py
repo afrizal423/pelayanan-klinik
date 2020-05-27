@@ -37,6 +37,10 @@ ALLOWED_HOSTS = ['192.168.0.7','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+     # General use templates & template tags (should appear first)
+    'adminlte3',
+    # Optional: Django admin theme (must be before django.contrib.admin)
+    'adminlte3_theme',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,7 +51,8 @@ INSTALLED_APPS = [
     'apoteker',
     'dokter',
     'pegawaiadmin',
-    'pasien'
+    'pasien',
+     
 ]
 
 MIDDLEWARE = [
