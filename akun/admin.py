@@ -24,12 +24,12 @@ class UserAdmini(UserAdmin):
         (('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'is_pegawaiadmin', 'is_dokter', 'is_apoteker')}),
         (('Important dates'), {'fields': ('date_joined', 'last_login')}),
     )
-    # add_fieldsets = (
-    #     (None, {
-    #         'classes': ('wide',),
-    #         'fields': ('username', 'password1', 'password2', 'is_pegawaiadmin', 'is_dokter', 'is_apoteker'),
-    #     }),
-    # )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'password1', 'password2', 'is_pegawaiadmin', 'is_dokter', 'is_apoteker'),
+        }),
+    )
 
 admin.site.register(User, UserAdmini)
 class AkunAdmin (admin.ModelAdmin):

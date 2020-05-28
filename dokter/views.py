@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from dokter.decorators import dokter_area
 from datetime import date
 from dokter.models import RekamMedis, Temp_Obat
-from apoteker.models import Obat
+from apoteker.models import Obat, PemesananObat
+from pegawaiadmin.models import Antrian
 from django.db.models import Q
 
 # Create your views here.
@@ -34,8 +35,42 @@ def periksa(request , id):
     print(obj.idpendaftaran.norm.norm)
     idpasien = "periksapasien/"+ str(id)
     pesanobat = Temp_Obat.objects.all().filter(created_on__contains=date.today(), url__contains=idpasien)
+    if request.method == 'POST':
+        tempobt = Temp_Obat.objects.all().filter(created_on__contains=date.today(),url__contains=request.META.get('HTTP_REFERER')) 
+        ant = get_object_or_404(Antrian, id = id)
+        # print(tempobt.first().id_obat)
+        # obat = get_object_or_404(Obat, id = id)  
+        for obt in tempobt:
+            psnobat = PemesananObat()
+            psnobat.idobat = Obat.objects.get(id = obt.id_obat)
+            psnobat.jumlah_obat = obt.jumlah_obat
+            psnobat.subtotal_obat = obt.jumlah_obat * obt.harga_obat
+            psnobat.idrm = RekamMedis.objects.get(id = id)
+            psnobat.save()
+            obat = get_object_or_404(Obat, id = obt.id_obat)
+            obat.stok_obat = obat.stok_obat - obt.jumlah_obat
+            obat.save()
+            # print(obt.nama_obat,"=",obat.stok_obat - obt.jumlah_obat)
+            # print("id obatnya = ", obt.id_obat)
+            # print("jumlah obatnya = ", obt.jumlah_obat)
+            # print("subtotal obatnya = ", obt.jumlah_obat * obt.harga_obat)
+            # print("id rm = ", id)
+        tempobt.delete()
+        ant.statusdokter = "selesai"
+        ant.save()
+
+        # print("post iniiii")
+        # rm = RekamMedis()
+        # rm.id = id
+        # rm.idantrian = id
+        obj.diagnosa = request.POST['diagnosa']
+        obj.save()
+        return redirect('/dokter/antrianpasien/')
+        # print(request.META.get('HTTP_REFERER'))
+
+    
     # print(pesanobat.get())
-    print(pesanobat.query)
+    # print(pesanobat.query)
     # item_id = str(1)
     # cart_items = request.session
 

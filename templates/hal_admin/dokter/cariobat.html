@@ -13,13 +13,13 @@
 	<tr>
 		<td>{{ r.nama_obat }}</td>
 		<td>{{ r.stok_obat }}</td>
-		<td><input type="button" class="btn btn-outline-warning" onclick="location.href='{% url 'dokter:tambah_obat' r.id  %}'" value=" Pilih Obat" />
+		<td><input type="button" class="btn btn-warning" onclick="location.href='{% url 'dokter:tambah_obat' r.id  %}'" value=" Pilih Obat" />
 		</td>
 	</tr>
 	{% endfor %}
 	</table>
 {% else %}
 	<div class="note text-white">
-	Your search yielded no results
+	Obat yang dicari tidak ada.
 	</div>
 {% endif %}

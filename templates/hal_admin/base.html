@@ -154,7 +154,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <i class="fas fa-bullhorn text-green"></i>
-                                    <span class="nav-link-text">Antrian</span>
+                                    <span class="nav-link-text">Pembayaran</span>
                                 </a>
                             </li>
                             {% elif sessionnya == "dokter" %}
@@ -183,6 +183,12 @@
                                         </li>
                                     </ul>
                                 </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'apoteker:antrian_obat' %}">
+                                    <i class="fas fa-users text-red"></i>
+                                    <span class="nav-link-text">Antrian Obat</span>
+                                </a>
                             </li>
                             {% endif %}
 <!--                             

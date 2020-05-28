@@ -22,7 +22,7 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">Edit Data Pasien</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">Pemesanan Obat</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                             <li class="breadcrumb-item">
@@ -30,8 +30,8 @@
                                     <i class="fas fa-home"></i>
                                 </a>
                             </li>
-                            <li class="breadcrumb-item"><a href="{% url 'pegawaiadmin:index_pasien' %}">Pasien</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Edit Pasien</li>
+                            <li class="breadcrumb-item"><a href="{% url 'apoteker:index_apoteker' %}">Apoteker</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Pesan Obat</li>
                         </ol>
                     </nav>
                 </div>
@@ -54,27 +54,12 @@
                 <!-- Card header -->
                 <!-- {{ request.get_host }}{{ request.get_full_path }} -->
                 <div class="card-header">
-                  <h3 class="mb-0">Edit Data Pasien Baru </h3>
+                  <h3 class="mb-0">Pemesanan Obat</h3>
                 </div>
                 <!-- Card body -->
                 <div class="card-body">
                   <form method="post">
                     {% csrf_token %}
-                    <!-- <p>
-                      <label for="id_norm">Norm:</label>
-                       <input type="text" name="norm" maxlength="25" required id="id_norm" value="{{ norm }}">
-                      </p>
-                    <p>
-                      <label for="id_namapasien">Namapasien:</label> 
-                      <input type="text" name="namapasien" maxlength="200" required id="id_namapasien">
-                    </p>
-                    <p>
-                      <label for="id_alamat">Alamat:</label> 
-                      <textarea name="alamat" cols="40" rows="10" id="id_alamat">
-                    </textarea></p>
-                    <p><label for="id_ttl">Ttl:</label> <input type="text" name="ttl" required id="id_ttl"></p>
-                    <p><label for="id_notelp">Notelp:</label> <input type="text" name="notelp" maxlength="15" required id="id_notelp"></p> -->
-                    <!-- <table>{{ form.as_p }}</table> -->
                     
                     <div class="form-group row">
                         <label for="example-text" class="col-md-2 col-form-label form-control-label">No RM Pasien</label>
@@ -95,7 +80,7 @@
                         </div>
                       </div>
                     <div class="form-group row">
-                        <label for="example-diagnosa" class="col-md-2 col-form-label form-control-label">Diagnosa <br><small>(Diisi oleh dokter)</small> </label>
+                        <label for="example-diagnosa" class="col-md-2 col-form-label form-control-label">Diagnosa <br><small>(Diisi oleh dokter)</small><br><small>(Diisi apabila ada catatan Apoteker)</small>  </label>
                         <div class="col-md-10">
                             <textarea class="form-control" name="diagnosa" id="example-diagnosa" rows="6">{{ data.diagnosa }}</textarea>
                         </div>
@@ -119,7 +104,7 @@
                           
                           </script>
                         <input hidden name="id_periksa" class="form-control" type="text" value="{{ data.id }}" >
-                        <input class="form-control" id="cari" name="q"  type="text" placeholder="Cari obat disini">
+                        <!-- <input class="form-control" id="cari" name="q"  type="text" placeholder="Cari obat disini"> -->
                         <div class="card bg-primary">
                           <div id="results"></div>
                        </div>
@@ -128,14 +113,15 @@
                           <thead>
                             <tr>
                               <th scope="col">Nama Obat</th>
-                              <th scope="col">Handle</th>
+                              <th scope="col">Jumlah Obat yang dipesan</th>
                             </tr>
                           </thead>
                           <tbody>
                             {% for r in pesanan %}
                             <tr>
-                              <td>{{ r.nama_obat }}</td>
-                              <td><a type="button" class="btn btn-outline-danger" href="{% url 'dokter:hapus_obat' r.id  %}" onclick="return confirm('Anda yakin mau menghapus data ini?');">Hapus Obat</a>
+                              <td>{{ r.idobat.nama_obat }}</td>
+                              <td>{{ r.jumlah_obat }}</td>
+                              <!-- <td><a type="button" class="btn btn-outline-danger" href="{% url 'dokter:hapus_obat' r.id  %}" onclick="return confirm('Anda yakin mau menghapus data ini?');">Hapus Obat</a> -->
                               </td>
                             </tr>
                             {% endfor %}                            
@@ -148,11 +134,36 @@
                         {% endif %}
                       </div>
                   </div> 
+                    <!-- <button class="btn btn-primary" type="submit">Simpan</button>
+
+                  </form> -->
+                </div>
+                
+              </div>
+              <div class="card">
+                <!-- Card header -->
+                <!-- {{ request.get_host }}{{ request.get_full_path }} -->
+                <div class="card-header">
+                  <h3 class="mb-0">Status Pengerjaan Obat</h3>
+                </div>
+                <!-- Card body -->
+                <div class="card-body">
+                    
+                  <div class="form-group row">
+                    <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Status Pengerjaan</label>
+                    <div class="col-md-10">
+                      <select class="form-control" id="example-text-input" required name="statusapoteker">
+                          <option value="selesai">Selesai</option>
+                          <option value="proses">Dalam Proses</option>
+                        </select>
+                      <!-- <input class="form-control" type="text" name="namapasien" maxlength="200" required placeholder="John Snow" id="example-text-input"> -->
+                    </div>
+                  </div>
+                    
                     <button class="btn btn-primary" type="submit">Simpan</button>
 
                   </form>
                 </div>
-              </div>
         </div>
     </div>
     <!-- Argon Scripts -->
