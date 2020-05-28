@@ -30,16 +30,14 @@ class DataPegawai(models.Model):
 
 class Akun (models.Model):
     JENIS_AKUN_CHOICES = (
-        ('dokter', 'Dokter'),
+        ('dokter', 'Dokter Umum'),
+        ('dokter_gigi', 'Dokter Gigi'),
         ('pegawai_admin', 'Pegawai Admin'),
         ('pegawai_apotek', 'Pegawai Apotek'),
     )
     akun = models.ForeignKey(User,on_delete=models.CASCADE)
     pegawai = models.ForeignKey(DataPegawai,on_delete=models.CASCADE)
     jenis_akun = models.CharField(max_length=20, choices=JENIS_AKUN_CHOICES)
-    is_pegawaiadmin = models.BooleanField(default=False)
-    is_dokter = models.BooleanField(default=False)
-    is_apoteker = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.DataPegawai.nama

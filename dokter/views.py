@@ -19,7 +19,11 @@ def index(request):
 
 @dokter_area
 def antrian(request):
-    hasil = RekamMedis.objects.all().select_related('idpendaftaran').filter(created_on__contains=date.today(), idantrian__is_dokterumum=True, idantrian__statusdokter="belum").order_by('created_on')
+    if request.session['jenis_akun'] == "dokter":
+        hasil = RekamMedis.objects.all().select_related('idpendaftaran').filter(created_on__contains=date.today(), idantrian__is_dokterumum=True, idantrian__statusdokter="belum").order_by('created_on')
+    elif request.session['jenis_akun'] == "dokter_gigi":
+        hasil = RekamMedis.objects.all().select_related('idpendaftaran').filter(created_on__contains=date.today(), idantrian__is_doktergigi=True, idantrian__statusdokter="belum").order_by('created_on')
+    
     data = {
         'sessionnya' : request.session['jenis_akun'],
         'namaakun' : request.session['namapegawai'],
@@ -28,6 +32,23 @@ def antrian(request):
     # print(hasil.get().idpendaftaran.norm.norm)
     # print(hasil.get().idantrian.noantrian)
     return render(request, 'hal_admin/dokter/antrian.html', data)
+
+@dokter_area
+def history(request):
+    if request.session['jenis_akun'] == "dokter":
+        hasil = RekamMedis.objects.all().select_related('idpendaftaran').filter(idantrian__is_dokterumum=True, idantrian__statusdokter="selesai").order_by('created_on')
+    elif request.session['jenis_akun'] == "dokter_gigi":
+        hasil = RekamMedis.objects.all().select_related('idpendaftaran').filter(idantrian__is_doktergigi=True, idantrian__statusdokter="selesai").order_by('created_on')
+    
+    data = {
+        'sessionnya' : request.session['jenis_akun'],
+        'namaakun' : request.session['namapegawai'],
+        'data': hasil
+    }
+    # print(hasil.get().idpendaftaran.norm.norm)
+    # print(hasil.get().idantrian.noantrian)
+    return render(request, 'hal_admin/dokter/history.html', data)
+
 
 @dokter_area
 def periksa(request , id):
@@ -57,6 +78,8 @@ def periksa(request , id):
             # print("id rm = ", id)
         tempobt.delete()
         ant.statusdokter = "selesai"
+        # if request.session['jenis_akun'] == "dokter_gigi":
+        #     ant.statusapoteker = "selesai"    
         ant.save()
 
         # print("post iniiii")

@@ -22,7 +22,7 @@ def login_view(request):
                 except:
                     messages.add_message(request, messages.INFO, 'Akun ini belum terhubung dengan data karyawan, silahkan hubungi administrator')
                 
-                if request.session['jenis_akun'] == "dokter":
+                if request.session['jenis_akun'] == "dokter" or request.session['jenis_akun'] == "dokter_gigi":
                     return redirect('/dokter/index') # sudah login ini
                 elif request.session['jenis_akun'] == "pegawai_admin": 
                     return redirect('/pegawaiadmin/index') # sudah login ini

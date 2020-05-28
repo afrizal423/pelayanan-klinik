@@ -56,9 +56,11 @@ def tbantrian(request):
             if  daftar.tujuanpoli == "Poli Umum":
                 ant.is_dokterumum=True
                 ant.statusdokter="belum"
+                ant.statusapoteker="belum"
             elif daftar.tujuanpoli == "Poli Gigi":
                 ant.is_doktergigi=True
                 ant.statusdokter="belum"
+                ant.statusapoteker="belum"
             ant.save()
             rm = RekamMedis(idpendaftaran=daftar, idantrian=ant)
             rm.save()
@@ -79,6 +81,7 @@ def tbantrian(request):
                 ant.noantrian=counter
                 ant.is_dokterumum=True
                 ant.statusdokter="belum"
+                ant.statusapoteker="belum"
             elif daftar.tujuanpoli == "Poli Gigi" :
                 if nolama.count() == 0:
                     counter=1
@@ -86,6 +89,7 @@ def tbantrian(request):
                     counter = nolama.first().noantrian + 1
                 ant.noantrian=counter
                 ant.is_doktergigi=True
+                ant.statusdokter="belum"
                 ant.statusapoteker="belum"
             ant.save()
             rm = RekamMedis(idpendaftaran=daftar, idantrian=ant)

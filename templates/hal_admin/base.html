@@ -55,7 +55,7 @@
                 <div class="sidenav-header d-flex align-items-center">
                     {% if sessionnya == "pegawai_admin" %}
                     <a class="navbar-brand" href="{% url 'pegawaiadmin:index_pegawaiadmin' %}">
-                    {% elif sessionnya == "dokter" %}
+                    {% elif sessionnya == "dokter" or sessionnya == "dokter_gigi" %}
                     <a class="navbar-brand" href="{% url 'pegawaiadmin:index_pegawaiadmin' %}">
                     {% elif sessionnya == "pegawai_apotek" %}
                     <a class="navbar-brand" href="{% url 'apoteker:index_apoteker' %}">
@@ -91,7 +91,7 @@
                             <li class="nav-item">
                                 {% if sessionnya == "pegawai_admin" %}
                                 <a class="nav-link" href="{% url 'pegawaiadmin:index_pegawaiadmin' %}">
-                                    {% elif sessionnya == "dokter" %}
+                                    {% elif sessionnya == "dokter" or sessionnya == "dokter_gigi" %}
                                     <a class="nav-link" href="{% url 'pegawaiadmin:index_pegawaiadmin' %}">
                                         {% elif sessionnya == "pegawai_apotek" %}
                                         <a class="nav-link" href="{% url 'apoteker:index_apoteker' %}">
@@ -157,7 +157,7 @@
                                     <span class="nav-link-text">Pembayaran</span>
                                 </a>
                             </li>
-                            {% elif sessionnya == "dokter" %}
+                            {% elif sessionnya == "dokter" or sessionnya == "dokter_gigi"  %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'dokter:antrian_pasien' %}">
                                     <i class="fas fa-users text-red"></i>

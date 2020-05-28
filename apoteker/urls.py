@@ -6,6 +6,7 @@ app_name = 'apoteker' # Be careful setting the name to just /login use userlogin
 urlpatterns=[
     path('index/',views.index,name='index_apoteker'),
     path('dtobat/',views.index_obat,name='index_obat'),
+    path('historyobat/',views.history,name='history_obatnya'),
     path('tambahobat/',views.tambah_obat,name='tambah_obatnya'),
     path('antrianobat/',views.antrian,name='antrian_obat'),
     path('pesananobat/<int:id>',views.pesanan_obat,name='pesanan_obat'),

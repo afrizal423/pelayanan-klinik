@@ -72,7 +72,7 @@ def hapus_obat(request, id):
 
 @apoteker_area
 def antrian(request):
-    hasil = RekamMedis.objects.all().select_related('idpendaftaran').filter(created_on__contains=date.today(), idantrian__is_dokterumum=True, idantrian__statusdokter="selesai").order_by('created_on')
+    hasil = RekamMedis.objects.all().select_related('idpendaftaran').filter(created_on__contains=date.today(), idantrian__statusdokter="selesai", idantrian__statusapoteker="belum").order_by('created_on')
     data = {
         'sessionnya' : request.session['jenis_akun'],
         'namaakun' : request.session['namapegawai'],
@@ -81,6 +81,18 @@ def antrian(request):
     # print(hasil.get().idpendaftaran.norm.norm)
     # print(hasil.get().idantrian.noantrian)
     return render(request, 'hal_admin/apoteker/antrian.html', data)
+
+@apoteker_area
+def history(request):
+    hasil = RekamMedis.objects.all().select_related('idpendaftaran').filter(idantrian__statusdokter="selesai", idantrian__statusapoteker="selesai").order_by('created_on')
+    data = {
+        'sessionnya' : request.session['jenis_akun'],
+        'namaakun' : request.session['namapegawai'],
+        'data': hasil
+    }
+    # print(hasil.get().idpendaftaran.norm.norm)
+    # print(hasil.get().idantrian.noantrian)
+    return render(request, 'hal_admin/apoteker/history.html', data)
 
 @apoteker_area
 def pesanan_obat(request, id):
