@@ -9,9 +9,12 @@ urlpatterns=[
     path('dtpasien/',ps.index,name='index_pasien'),
     path('antrian/',views.antrian,name='index_antrian'),
     path('pembayaran/',views.pembayaran,name='pembayaran'),
-    path('pembayaran/<int:id>',views.detailbayar,name='detail_pembayaran'),
+    path('historypembayaran/',views.history,name='history'),
+    path('pembayaran/<int:id>/bayar',views.detailbayar,name='detail_pembayaran'),
     path('tambahantrian/',views.tbantrian,name='tambahantrian'),
     path('tambahpasien/',ps.tambah_pasien,name='tambahpasien'),
+    path('pdf/',views.generate_pdf,name='pdf2'),
+    path('print/<int:id>/pdf',views.generate_pdf,name='pdf'),
     path('hapuspasien/<int:id>',ps.hapus_pasien,name='hapuspasien'),
     path('editpasien/<int:id>',ps.edit_pasien,name='editpasien'),
 

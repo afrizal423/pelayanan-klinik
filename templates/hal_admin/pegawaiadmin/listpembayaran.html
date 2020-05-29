@@ -36,7 +36,7 @@ History Data Antrian
                 </div>
                 <div class="col-lg-6 col-5 text-right">
                     <a
-                        href="{% url 'pegawaiadmin:tambahantrian' %}"
+                        href="{% url 'pegawaiadmin:history' %}"
                         class="btn btn-sm btn-neutral">history</a>
                     <!--  -->
                 </div>
@@ -65,6 +65,7 @@ History Data Antrian
                                 <th>No RM</th>
                                 <th>Nama Pasien</th>
                                 <th>Tujuan Poli</th>
+                                <th>Waktu Daftar Antrian</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -74,6 +75,7 @@ History Data Antrian
                                 <th>No RM</th>
                                 <th>Nama Pasien</th>
                                 <th>Tujuan Poli</th>
+                                <th>Waktu Daftar Antrian</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -84,9 +86,10 @@ History Data Antrian
                                 <td>{{ps.idpendaftaran.norm.norm}}</td>
                                 <td>{{ps.idpendaftaran.norm.namapasien}}</td>
                                 <td>{{ps.idpendaftaran.tujuanpoli}}</td>
+                                <td>{{ps.idpendaftaran.created_on|date:'H:i'}} WIB</td>
                                 <td>
                                    <input type="button" class="btn btn-primary" onclick="location.href='{% url 'pegawaiadmin:detail_pembayaran' ps.id  %}'" value="Bayar" />
-                                   <input type="button" class="btn btn-primary" onclick="location.href='{% url 'dokter:periksa_pasien' ps.id  %}'" value="Print Bukti" />
+                                   <input type="button" class="btn btn-primary" onclick="location.href='{% url 'pegawaiadmin:pdf' ps.id  %}'" value="Print Bukti" />
                                     <!--  <a type="button" class="btn btn-outline-danger" href="{% url 'pegawaiadmin:hapuspasien' ps.id  %}" onclick="return confirm('Anda yakin mau menghapus data ini?');">Delete</a> -->
                                     
                                   </td>                               

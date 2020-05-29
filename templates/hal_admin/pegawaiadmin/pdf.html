@@ -1,0 +1,126 @@
+<html>
+    <head></head>
+
+    <body style="font-family:'Courier New'">
+        <h1>
+            <font face="Courier New" size="5">Klinik Kesehatan "<i>Ndang Waras</i>"</font>
+        </h1>
+        <table>
+            <tr>
+                <td>
+                    Jl. Ngalor ngidul no 21,<br>
+                    Kota Jonggol.
+                </td>
+
+                <td style="padding-left:120px">(031) 1404514022</td>
+            </tr>
+        </table>
+
+        ------------------------------------------------------
+        <table>
+            <tr>
+                <td>
+                    Nama Pasien
+                    <br>
+                    tanggal lahir
+                </td>
+
+                <td style="padding-left:180px">
+                    No RM
+                    <br>
+                    tanggal periksa
+
+                </td>
+            </tr>
+        </table>
+
+        ------------------------------------------------------
+
+        <?php
+$nama=$_POST["nama"];
+$alamat=$_POST["alamat"];
+$cat=$_POST["cat"];
+$warna=$_POST["warna"];
+$beli=$_POST["beli"];
+?>
+        asdasd
+        <table>
+
+            <td colspan="4">------------------------------------------------------</td>
+
+            <tr>
+                <td>Nama Costumer</td>
+                <td>:</td>
+                <td>
+                    <?php echo $nama;?></td>
+            </tr>
+
+            <tr>
+                <td>Alamat</td>
+                <td>:</td>
+                <td><?php echo $alamat;?></td>
+            </tr>
+
+            <tr>
+                <td>Jenis Cat</td>
+                <td>:</td>
+                <td>
+                    <?php echo $cat;?></td>
+            </tr>
+
+            <tr>
+                <td>Warna</td>
+                <td>:</td>
+                <td><?php echo $warna;?></td>
+            </tr>
+
+            <tr>
+                <td>Harga</td>
+                <td>
+                    :
+                </td>
+                <td style="padding-left: 180px">Rp. 1000</td>
+            </tr>
+
+            <tr>
+                <td>Jumlah Beli</td>
+                <td>:</td>
+                <td><?php echo $beli;?></td>
+            </tr>
+
+            <td colspan="4">------------------------------------------------------ (*)</td>
+
+            <tr>
+                <td>Total Harga</td>
+                <td>:</td>
+                <td style="padding-left:180px">Rp. $tot_harga</td>
+            </tr>
+
+            <tr>
+                <td>Diskon</td>
+                <td>:</td>
+                <td style="padding-left:180px">Rp. $diskon</td>
+            </tr>
+
+            <td colspan="4">------------------------------------------------------ (-)</td>
+
+            <tr>
+                <td>Total Bayar</td>
+                <td>:</td>
+                <td style="padding-left:180px">
+                    <?php $tot_bayar=$tot_harga-$diskon;
+echo "Rp. $tot_bayar";
+?></td>
+            </tr>
+
+            <td colspan="4">------------------------------------------------------</td>
+
+            <tr>
+                <td></br>
+                <a href="form_cat.php">Kembali</a>
+            </td>
+        </tr>
+
+    </table>
+</body>
+</html>

@@ -64,7 +64,7 @@
                                 <th>No Antrian</th>
                                 <th>No RM</th>
                                 <th>Nama Pasien</th>
-                                <!-- <th>Tujuan Poli</th> -->
+                                <th>Waktu Daftar Antrian</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -73,7 +73,7 @@
                                 <th>No Antrian</th>
                                 <th>No RM</th>
                                 <th>Nama Pasien</th>
-                                <!-- <th>Tujuan Poli</th> -->
+                                <th>Waktu Daftar Antrian</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -83,7 +83,7 @@
                                 <td>{{ps.idantrian.noantrian}}</td>
                                 <td>{{ps.idpendaftaran.norm.norm}}</td>
                                 <td>{{ps.idpendaftaran.norm.namapasien}}</td>
-                                <!-- <td>{{ps.tujuanpoli}}</td> -->
+                                <td>{{ps.idpendaftaran.created_on|date:'H:i'}} WIB</td>
                                 <td>
                                    <input type="button" class="btn btn-primary" onclick="location.href='{% url 'apoteker:pesanan_obat' ps.id  %}'" value="Lihat Pesanan Obat" />
                                     <!--  <a type="button" class="btn btn-outline-danger" href="{% url 'pegawaiadmin:hapuspasien' ps.id  %}" onclick="return confirm('Anda yakin mau menghapus data ini?');">Delete</a> -->

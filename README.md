@@ -86,7 +86,8 @@ Apotek | Mengelola data biaya obat(akan diteruskan ke pembayaran di pegawai admi
 - [x] Landing page dashboard detail pemesanan obat dari dokter untuk apoteker (Frontend)
 - [x] Sistem menghitung jumlah nominal harga obat dari apoteker (Backend)
 - [x] Landing page untuk pembayaran (Frontend)
-- [ ] Sistem mencatat pembayaran (Backend)
+- [x] Sistem mencatat pembayaran (Backend)
+- [ ] Export PDF pembayaran
 - [ ] <b> DONE!!</b> 
 
 ## Installation

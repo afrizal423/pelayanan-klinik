@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from pegawaiadmin.decorators import pegawaiadmin_area
-from pegawaiadmin.models import Pendaftaran, Antrian, BiayaPemeriksaan
+from pegawaiadmin.models import Pendaftaran, Antrian, BiayaPemeriksaan, Pembayaran
 from dokter.models import RekamMedis
 from datetime import date
 from pasien.models import Pasien
@@ -9,6 +9,12 @@ from pegawaiadmin.forms import AntrianForm, PendaftaranForm
 from django.utils import timezone
 import datetime
 from apoteker.models import PemesananObat
+from .utils import render_to_pdf
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import tempfile
+from django.core.files.storage import FileSystemStorage
+
 
 # Create your views here.
 @pegawaiadmin_area
@@ -122,6 +128,18 @@ def pembayaran(request):
     return render(request, 'hal_admin/pegawaiadmin/listpembayaran.html', data)
 
 @pegawaiadmin_area
+def history(request):
+    hasil = RekamMedis.objects.all().select_related('idpendaftaran', 'idantrian').filter(idantrian__statusdokter="selesai").order_by('created_on')
+    data = {
+        'sessionnya' : request.session['jenis_akun'],
+        'namaakun' : request.session['namapegawai'],
+        'data': hasil
+    }
+    # print(hasil.get().idpendaftaran.norm.norm)
+    # print(hasil.get().idantrian.noantrian)
+    return render(request, 'hal_admin/pegawaiadmin/history.html', data)
+
+@pegawaiadmin_area
 def detailbayar(request , id):
     obj = get_object_or_404(RekamMedis, id = id)
     pesanobat = PemesananObat.objects.all().filter(created_on__contains=date.today(), idrm=id)
@@ -132,7 +150,18 @@ def detailbayar(request , id):
         # print(i.subtotal_obat) 
     print(totalobat)
     harusbayar = biayadokter.biaya_pemeriksaan+totalobat
-   
+    if request.method == 'POST':
+        ant = get_object_or_404(Antrian, idpendaftaran = id)
+        pemb = Pembayaran()
+        pemb.statusbayar = request.POST['statusbayar']
+        pemb.total_harga = harusbayar
+        pemb.uang_dibayarkan = request.POST['uang_dibayarkan']
+        pemb.idpendaftaran = Pendaftaran.objects.get(id = id)
+        ant.statusapoteker = request.POST['statusapoteker']
+        ant.save()
+        pemb.save()
+        print(request.POST['statusapoteker'])
+        return redirect('/pegawaiadmin/pembayaran/')
 
     data = {
         'sessionnya' : request.session['jenis_akun'],
@@ -144,3 +173,48 @@ def detailbayar(request , id):
         'total' : harusbayar
     }
     return render(request, 'hal_admin/pegawaiadmin/pesanan.html', data)
+
+def pdf(request):
+    return render(request, 'hal_admin/pegawaiadmin/pdf/bayar.html')
+    # data = {
+    #          'today': datetime.date.today(), 
+    #          'amount': 39.99,
+    #         'customer_name': 'Cooper Mann',
+    #         'order_id': 1233434,
+    #     }
+    # pdf = render_to_pdf('hal_admin/pegawaiadmin/pdf/bayar.html', data)
+    # return HttpResponse(pdf, content_type='application/pdf')
+
+def generate_pdf(request, id):
+    hasil = RekamMedis.objects.all().select_related('idpendaftaran', 'idantrian').filter(id=id).order_by('created_on')
+    print(hasil.get().idpendaftaran.norm.norm)
+    pesanobat = PemesananObat.objects.all().filter(idrm=id)
+    biayadokter = BiayaPemeriksaan.objects.all()[:1].get()
+    totalobat=0
+    for i in pesanobat:
+        totalobat += i.subtotal_obat
+    harusbayar = biayadokter.biaya_pemeriksaan+totalobat
+    uangnya = Pembayaran.objects.all().filter(idpendaftaran=id).get()
+    data = {
+        'totalobat': totalobat,
+        'biayadokter': biayadokter.biaya_pemeriksaan,
+        'pesanan': pesanobat,
+        'nonota' : id,
+        'data' : hasil.get(),
+        'namaakun' : request.session['namapegawai'],
+        'total' : harusbayar,
+        'uang' : uangnya,
+        'kembalian' : uangnya.uang_dibayarkan - harusbayar
+    }
+    html_string = render_to_string('hal_admin/pegawaiadmin/pdf/bayar.html', data)
+
+    html = HTML(string=html_string)
+    html.write_pdf(target='/tmp/mypdf.pdf');
+
+    fs = FileSystemStorage('/tmp')
+    with fs.open('mypdf.pdf') as pdf:
+        response = HttpResponse(pdf, content_type='application/pdf')
+        # response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+        return response
+
+    return response

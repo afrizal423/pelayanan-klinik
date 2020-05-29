@@ -1,7 +1,7 @@
 {% extends "hal_admin/base.html" %}{% load static %}
 
 {% block title %}
-    Data Antrian
+History Data Antrian
 {% endblock title %}
 {% block header %}
     <link
@@ -22,7 +22,7 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-                    <h6 class="h2 text-white d-inline-block mb-0">History Obat</h6>
+                    <h6 class="h2 text-white d-inline-block mb-0">List History Pembayaran Antrian</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                             <li class="breadcrumb-item">
@@ -30,16 +30,11 @@
                                     <i class="fas fa-home"></i>
                                 </a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">History Obat Pasien</li>
+                            <li class="breadcrumb-item active" aria-current="page">List History Pembayaran  Antrian Pasien</li>
                         </ol>
                     </nav>
                 </div>
-                <!-- <div class="col-lg-6 col-5 text-right">
-                    <a
-                        href="{% url 'pegawaiadmin:tambahantrian' %}"
-                        class="btn btn-sm btn-neutral">Tambah Data Antrian Pasien</a>
-                    <!--  --
-                </div> -->
+               
             </div>
         </div>
     </div>
@@ -52,7 +47,7 @@
             <div class="card">
                 <!-- Card header -->
                 <div class="card-header">
-                    <h3 class="mb-0">History Obat Pasien Klinik Ndang Waras</h3>
+                    <h3 class="mb-0">List Pembayaran  Antrian Pasien Klinik Ndang Waras</h3>
                     <p class="text-sm mb-0">
                         Berikut ini adalah data antrian pasien yang ada di Klinik Ndang Waras.
                     </p>
@@ -64,7 +59,8 @@
                                 <th>No Antrian</th>
                                 <th>No RM</th>
                                 <th>Nama Pasien</th>
-                                <th>Waktu Daftar Antrian</th>
+                                <th>Tujuan Poli</th>
+                                <th>Tanggal</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -73,7 +69,8 @@
                                 <th>No Antrian</th>
                                 <th>No RM</th>
                                 <th>Nama Pasien</th>
-                                <th>Waktu Daftar Antrian</th>
+                                <th>Tujuan Poli</th>
+                                <th>Tanggal</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -83,9 +80,11 @@
                                 <td>{{ps.idantrian.noantrian}}</td>
                                 <td>{{ps.idpendaftaran.norm.norm}}</td>
                                 <td>{{ps.idpendaftaran.norm.namapasien}}</td>
+                                <td>{{ps.idpendaftaran.tujuanpoli}}</td>
                                 <td>{{ps.idpendaftaran.created_on|date:'Y-m-d H:i'}} WIB</td>
                                 <td>
-                                   <input type="button" class="btn btn-primary" onclick="location.href='{% url 'apoteker:pesanan_obat' ps.id  %}'" value="Lihat Pesanan Obat" />
+                                   <input type="button" class="btn btn-primary" onclick="location.href='{% url 'pegawaiadmin:detail_pembayaran' ps.id  %}'" value="Lihat Detail" />
+                                   <input type="button" class="btn btn-primary" onclick="location.href='{% url 'dokter:periksa_pasien' ps.id  %}'" value="Print Bukti" />
                                     <!--  <a type="button" class="btn btn-outline-danger" href="{% url 'pegawaiadmin:hapuspasien' ps.id  %}" onclick="return confirm('Anda yakin mau menghapus data ini?');">Delete</a> -->
                                     
                                   </td>                               
