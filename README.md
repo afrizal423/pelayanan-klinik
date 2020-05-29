@@ -80,12 +80,12 @@ Apotek | Mengelola data biaya obat(akan diteruskan ke pembayaran di pegawai admi
 - [x] Landing page dashboard diagnosa untuk dokter (Frontend)
 - [x] Landing page dashboard detail diagnosa untuk dokter (Frontend)
 - [x] Sistem mengetahui stok obat agar dokter tau (Backend)
-- [ ] Sistem mencatat diagnosa dari dokter (Backend) <b>Proggres</b>
+- [x] Sistem mencatat diagnosa dari dokter (Backend) <b>Proggres</b>
 - [x] Landing page dashboard apotek untuk apoteker (Frontend) (Status: Pengembangan lagi)
 - [x] CRUD data Obat (Status: <b>Fix clear</b>) 
-- [ ] Landing page dashboard detail pemesanan obat dari dokter untuk apoteker (Frontend)
-- [ ] Sistem menghitung jumlah nominal harga obat dari apoteker (Backend)
-- [ ] Landing page untuk pembayaran (Frontend)
+- [x] Landing page dashboard detail pemesanan obat dari dokter untuk apoteker (Frontend)
+- [x] Sistem menghitung jumlah nominal harga obat dari apoteker (Backend)
+- [x] Landing page untuk pembayaran (Frontend)
 - [ ] Sistem mencatat pembayaran (Backend)
 - [ ] <b> DONE!!</b> 
 
