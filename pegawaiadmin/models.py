@@ -42,3 +42,32 @@ class Antrian(models.Model):
 
     def __str__(self):
         return "{}. {}".format(self.idpendaftaran, self.noantrian)
+
+class Pembayaran(models.Model):
+    STATUSNYA_CHOICES = (
+        ('selesai', 'Selesai'),
+        ('belum', 'Belum'),
+    )
+    idpendaftaran = models.OneToOneField(Pendaftaran, on_delete=models.CASCADE)
+    total_harga = models.BigIntegerField(blank = True, null = True,)
+    uang_dibayarkan = models.BigIntegerField(blank = True, null = True,)
+    statusbayar = models.CharField(max_length=10, blank = True, null = True, choices=STATUSNYA_CHOICES)
+    updated_on = models.DateTimeField(auto_now= True)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return self.idpendaftaran.norm.namapasien
+
+class BiayaPemeriksaan(models.Model):
+    biaya_pemeriksaan = models.BigIntegerField(blank = True, null = True,)
+    updated_on = models.DateTimeField(auto_now= True)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return "{}".format(self.biaya_pemeriksaan)

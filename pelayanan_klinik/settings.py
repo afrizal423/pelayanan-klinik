@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'dokter',
     'pegawaiadmin',
     'pasien',
+    # 'django_extensions',
      
 ]
 

@@ -1,13 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from pegawaiadmin.decorators import pegawaiadmin_area
-from pegawaiadmin.models import Pendaftaran, Antrian
+from pegawaiadmin.models import Pendaftaran, Antrian, BiayaPemeriksaan
 from dokter.models import RekamMedis
 from datetime import date
 from pasien.models import Pasien
 from pegawaiadmin.forms import AntrianForm, PendaftaranForm
 from django.utils import timezone
 import datetime
+from apoteker.models import PemesananObat
 
 # Create your views here.
 @pegawaiadmin_area
@@ -19,6 +20,7 @@ def index(request):
     }
     return render(request, 'hal_admin/pegawaiadmin/home.html', data)
 
+@pegawaiadmin_area
 def antrian(request):
     hasil = Pendaftaran.objects.all().select_related('norm','antrian').filter(tglantrian__contains=date.today()).order_by('created_on')
     data = {
@@ -29,6 +31,7 @@ def antrian(request):
     print(hasil.query)
     return render(request, 'hal_admin/pegawaiadmin/antrian.html', data)
 
+@pegawaiadmin_area
 def tbantrian(request):
     hasil = Pasien.objects.all().order_by('-created_on')
     formdaftar = PendaftaranForm(request.POST or None, request.FILES or None)
@@ -105,3 +108,39 @@ def tbantrian(request):
         'data' : hasil
     }
     return render(request, 'hal_admin/pegawaiadmin/tambahantrian.html', data)
+
+@pegawaiadmin_area
+def pembayaran(request):
+    hasil = RekamMedis.objects.all().select_related('idpendaftaran', 'idantrian').filter(created_on__contains=date.today(),idantrian__statusdokter="selesai").order_by('created_on')
+    data = {
+        'sessionnya' : request.session['jenis_akun'],
+        'namaakun' : request.session['namapegawai'],
+        'data': hasil
+    }
+    # print(hasil.get().idpendaftaran.norm.norm)
+    # print(hasil.get().idantrian.noantrian)
+    return render(request, 'hal_admin/pegawaiadmin/listpembayaran.html', data)
+
+@pegawaiadmin_area
+def detailbayar(request , id):
+    obj = get_object_or_404(RekamMedis, id = id)
+    pesanobat = PemesananObat.objects.all().filter(created_on__contains=date.today(), idrm=id)
+    biayadokter = BiayaPemeriksaan.objects.all()[:1].get()
+    totalobat=0
+    for i in pesanobat:
+        totalobat += i.subtotal_obat 
+        # print(i.subtotal_obat) 
+    print(totalobat)
+    harusbayar = biayadokter.biaya_pemeriksaan+totalobat
+   
+
+    data = {
+        'sessionnya' : request.session['jenis_akun'],
+        'namaakun' : request.session['namapegawai'],
+        'data': obj,
+        'pesanan': pesanobat,
+        'totalobat': totalobat,
+        'biayadokter': biayadokter.biaya_pemeriksaan,
+        'total' : harusbayar
+    }
+    return render(request, 'hal_admin/pegawaiadmin/pesanan.html', data)
