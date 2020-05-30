@@ -59,8 +59,7 @@ def periksa(request , id):
     if request.method == 'POST':
         tempobt = Temp_Obat.objects.all().filter(created_on__contains=date.today(),url__contains=request.META.get('HTTP_REFERER')) 
         ant = get_object_or_404(Antrian, id = id)
-        # print(tempobt.first().id_obat)
-        # obat = get_object_or_404(Obat, id = id)  
+          
         for obt in tempobt:
             psnobat = PemesananObat()
             psnobat.idobat = Obat.objects.get(id = obt.id_obat)
@@ -71,55 +70,16 @@ def periksa(request , id):
             obat = get_object_or_404(Obat, id = obt.id_obat)
             obat.stok_obat = obat.stok_obat - obt.jumlah_obat
             obat.save()
-            # print(obt.nama_obat,"=",obat.stok_obat - obt.jumlah_obat)
-            # print("id obatnya = ", obt.id_obat)
-            # print("jumlah obatnya = ", obt.jumlah_obat)
-            # print("subtotal obatnya = ", obt.jumlah_obat * obt.harga_obat)
-            # print("id rm = ", id)
+            
         tempobt.delete()
         ant.statusdokter = "selesai"
-        # if request.session['jenis_akun'] == "dokter_gigi":
-        #     ant.statusapoteker = "selesai"    
+           
         ant.save()
 
-        # print("post iniiii")
-        # rm = RekamMedis()
-        # rm.id = id
-        # rm.idantrian = id
         obj.diagnosa = request.POST['diagnosa']
         obj.save()
         return redirect('/dokter/antrianpasien/')
         # print(request.META.get('HTTP_REFERER'))
-
-    
-    # print(pesanobat.get())
-    # print(pesanobat.query)
-    # item_id = str(1)
-    # cart_items = request.session
-
-
-    # # Create an empty cart object if it does not exist yet 
-    # if not cart_items.has_key("cart_obat"):
-    #     cart_items["cart_obat"] = {}
-
-    # print(request.META.get('HTTP_REFERER'))
-
-    product_data = {
-    	'quantity': 2,
-    }
-    # try:
-	#     del cart_items["cart_obat"][str(1)]
-    # except KeyError:
-	#     pass
-    
-    # cart_items.modified = True
-    
-
-    # cart_items["cart_obat"][1] = product_data
-    # cart_items.modified = True
-
-    # print(cart_items.items())
-
 
     data = {
         'sessionnya' : request.session['jenis_akun'],

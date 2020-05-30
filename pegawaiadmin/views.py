@@ -43,25 +43,18 @@ def tbantrian(request):
     formdaftar = PendaftaranForm(request.POST or None, request.FILES or None)
     df = Pendaftaran.objects.all().select_related('norm','antrian').filter(tglantrian__contains=date.today()).order_by('-created_on')
 
-    # print(isgigi.query)
     if request.method == 'POST':
-        # if formdaftar.is_valid():
-            # formdaftar.save()
         daftar = Pendaftaran()
-        # daftar.norm=request.POST['norm rekammedik']
         daftar.norm=Pasien.objects.get(id=request.POST['norm rekammedik'])
         daftar.tujuanpoli=request.POST['tujuanpoli']
         daftar.gejalaawal=request.POST['gejalaawal']
         daftar.tglantrian = datetime.datetime.now()
-        # ant = Antrian()
         if df.count() == 0 :
             print("Kosong")
             counter = 1
             daftar.save()
             ant = Antrian(idpendaftaran=daftar, noantrian=counter)
 
-            # ant.idpendaftaran=daftar
-            # ant.noantrian=counter
             if  daftar.tujuanpoli == "Poli Umum":
                 ant.is_dokterumum=True
                 ant.statusdokter="belum"
@@ -75,7 +68,6 @@ def tbantrian(request):
             rm.save()
         else:
             daftar.save()
-            # nolama = Antrian.objects.all().filter(created_on__contains=date.today()).order_by('-created_on')
             if  daftar.tujuanpoli == "Poli Umum":
                 nolama = Antrian.objects.all().filter(created_on__contains=date.today(),is_dokterumum=True).order_by('-created_on')
             elif daftar.tujuanpoli == "Poli Gigi":
@@ -148,7 +140,7 @@ def detailbayar(request , id):
     for i in pesanobat:
         totalobat += i.subtotal_obat 
         # print(i.subtotal_obat) 
-    print(totalobat)
+    # print(totalobat)
     harusbayar = biayadokter.biaya_pemeriksaan+totalobat
     if request.method == 'POST':
         ant = get_object_or_404(Antrian, idpendaftaran = id)
@@ -176,14 +168,6 @@ def detailbayar(request , id):
 
 def pdf(request):
     return render(request, 'hal_admin/pegawaiadmin/pdf/bayar.html')
-    # data = {
-    #          'today': datetime.date.today(), 
-    #          'amount': 39.99,
-    #         'customer_name': 'Cooper Mann',
-    #         'order_id': 1233434,
-    #     }
-    # pdf = render_to_pdf('hal_admin/pegawaiadmin/pdf/bayar.html', data)
-    # return HttpResponse(pdf, content_type='application/pdf')
 
 def generate_pdf(request, id):
     hasil = RekamMedis.objects.all().select_related('idpendaftaran', 'idantrian').filter(id=id).order_by('created_on')
