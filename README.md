@@ -96,7 +96,7 @@ Buat virtualenv terlebih dahulu
 ```bash
 virtualenv {nama_virtual}
 ```
-Masuk kedalam virtual
+Masuk kedalam virtual (Windows)
 ```bash
 source {nama_virtual}/Scripts/activate
 ```
