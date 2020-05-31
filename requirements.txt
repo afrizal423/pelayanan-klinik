@@ -3,5 +3,5 @@ django-ckeditor
 pymysql
 django-adminlte3
 django-extensions
-# xhtml2pdf
+xhtml2pdf
 WeasyPrint
