@@ -114,9 +114,13 @@ Buka terminal untuk collectstatic
 ```bash
 python manage.py collectstatic 
 ```
-tetap pada terminal, jalankan dengan perintah
+tetap pada terminal, jalankan perintah migrasi
 ```bash
-python manage.py migrate && python manage.py runserver
+python manage.py makemigrations && python manage.py migrate
+```
+Jalankan server
+```bash
+python manage.py runserver
 ```
 ## Demo <br>
 [Demo in here](https://klinik.dj.afrizalmy.com/)<br>
