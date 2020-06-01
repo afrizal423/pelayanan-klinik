@@ -124,5 +124,8 @@ Jalankan server
 ```bash
 python manage.py runserver
 ```
+<b>Jika error saat deploy</b> <br>
+[dikarenakan cairocffi](https://stackoverflow.com/questions/29596426/how-to-pip-install-cairocffi)
+
 ## Demo <br>
 [Demo in here](https://klinik.dj.afrizalmy.com/)<br>
