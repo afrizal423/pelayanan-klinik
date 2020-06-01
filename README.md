@@ -107,6 +107,8 @@ source {nama_virtual}/bin/activate
 ```
 Install requirements menggunakan [pip](https://pip.pypa.io/en/stable/).
 ```bash
+pip install --upgrade pip
+pip install --upgrade setuptools
 pip install -r requirements.txt
 ```
 Buat database di phpmyadmin / sejenisnya dengan nama database pelayanan_klinik <br>
