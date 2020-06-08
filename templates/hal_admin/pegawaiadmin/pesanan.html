@@ -1,0 +1,257 @@
+{% extends "hal_admin/base.html" %}{% load static %}
+
+{% block title %}
+    Data Pasien
+{% endblock title %}
+{% block header %}
+    <link
+        rel="stylesheet"
+        href="{% static 'hal_admin/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css' %} ">
+    <link
+        rel="stylesheet"
+        href="{% static 'hal_admin/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css' %} "> 
+    <link
+        rel="stylesheet"
+        href="{% static 'hal_admin/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css' %} "> 
+{% endblock header %}
+    {% block konten %}
+
+       <!-- Header -->
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Rekam Medis</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'pegawaiadmin:index_pegawaiadmin' %}">
+                                    <i class="fas fa-home"></i>
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="{% url 'pegawaiadmin:index_pegawaiadmin' %}">Pegawai Admin</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Rekam Medis</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <!-- <a
+                        href="{% url 'pegawaiadmin:index_pegawaiadmin' %}"
+                        class="btn btn-sm btn-neutral">Tambah Data Pasien</a> -->
+                    <!--  -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <!-- Card header -->
+                <!-- {{ request.get_host }}{{ request.get_full_path }} -->
+                <div class="card-header">
+                  <h3 class="mb-0">Rekam Medis</h3>
+                </div>
+                <!-- Card body -->
+                <div class="card-body">
+                  <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="form-group row">
+                        <label for="example-text" class="col-md-2 col-form-label form-control-label">No RM Pasien</label>
+                        <div class="col-md-10">
+                          <input readonly name="norm" class="form-control" type="text" value="{{ data.idpendaftaran.norm.norm }}" id="example-text">
+                        </div>
+                      </div>
+                    <div class="form-group row">
+                      <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Nama Pasien</label>
+                      <div class="col-md-10">
+                        <input readonly class="form-control" type="text" name="namapasien" maxlength="200" value="{{ data.idpendaftaran.norm.namapasien }}" required placeholder="John Snow" id="example-text-input">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="example-text-poli" class="col-md-2 col-form-label form-control-label">Tujuan Poli</label>
+                      <div class="col-md-10">
+                        <input readonly class="form-control" type="text" name="tujuan_poli" maxlength="200" value="{{ data.idpendaftaran.tujuanpoli }}" required placeholder="John Snow" id="example-text-poli">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-alamat" class="col-md-2 col-form-label form-control-label">Gejala Awal</label>
+                        <div class="col-md-10">
+                            <textarea readonly class="form-control" name="gejalaawal" id="example-alamat" rows="3">{{ data.idpendaftaran.gejalaawal }}</textarea>
+                        </div>
+                      </div>
+                    <div class="form-group row">
+                        <label for="example-diagnosa" class="col-md-2 col-form-label form-control-label">Diagnosa <br><small>(Diisi oleh dokter)</small><br><small>(Diisi apabila ada catatan Apoteker)</small>  </label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" name="diagnosa" id="example-diagnosa" rows="6">{{ data.diagnosa }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="example-tel-input" class="col-md-2 col-form-label form-control-label">Obat untuk Pasien</label>
+                      <div class="col-md-10">
+                        <script type="text/javascript">
+                          $( document ).ready( function() {
+                              $( '#cari' ).keyup( function() {
+                                  var txt = $(this).val();
+                                  q = $( '#cari' ).val();
+                                  if (txt != '') {
+                                    console.log(q)
+                                    $( '#results' ).html( '&nbsp;' ).load( '{% url 'dokter:cari_obat' %}?q=' + q );
+                                  } else {
+                                    $('#results').html('');}
+                                  
+                              });
+                          });
+                          
+                          </script>
+                        <input hidden name="id_periksa" class="form-control" type="text" value="{{ data.id }}" >
+                        <!-- <input class="form-control" id="cari" name="q"  type="text" placeholder="Cari obat disini"> -->
+                        <div class="card bg-primary">
+                          <div id="results"></div>
+                       </div>
+                       {% if pesanan|length %}
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Nama Obat</th>
+                              <th scope="col">Jumlah Obat yang dipesan</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for r in pesanan %}
+                            <tr>
+                              <td>{{ r.idobat.nama_obat }}</td>
+                              <td>{{ r.jumlah_obat }}</td>
+                            </tr>
+                            {% endfor %}                            
+                          </tbody>
+                        </table>
+                        {% else %}
+                        <div class="note text-white">
+                        Your search yielded no results
+                        </div>
+                        {% endif %}
+                      </div>
+                      <input hidden readonly class="form-control" type="text" name="statusbayar" maxlength="200" value="selesai" required >
+                  </div> 
+                    <!-- <button class="btn btn-primary" type="submit">Simpan</button>
+
+                  </form> -->
+                </div>
+                
+              </div>
+              <div class="card">
+                <!-- Card header -->
+                <!-- {{ request.get_host }}{{ request.get_full_path }} -->
+                <div class="card-header">
+                  <h3 class="mb-0">Detail Pembayaran</h3>
+                </div>
+                <!-- Card body -->
+                <div class="card-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nama Obat</th>
+                        <th scope="col">Jumlah</th>
+                        <th scope="col">Sub Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for r in pesanan %}
+                      <tr>
+                        <td>{{ r.idobat.nama_obat }}</td>
+                        <td>{{ r.jumlah_obat }}</td>
+                        <td>{{ r.subtotal_obat }}</td>
+                      </tr>
+                      {% endfor %}                            
+                    </tbody>
+                  </table>
+
+                  <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6 text-right">
+                      <b>Total harga Obat = {{totalobat}} <br>
+                        Biaya Administrasi & Dokter = {{biayadokter}}<br>
+                        Total Yang harus dibayarkan = {{total}}<br>
+                      </b>
+                      <div class="form-group row">
+                        <label for="uang" class="col-md-2 col-form-label form-control-label">Uang Pasien</label>
+                        <div class="col-md-10">
+                          <input class="form-control" type="number" name="uang_dibayarkan" required id="uang"><input class="btn btn-primary" type="button" name="byr" id="byr" value="Bayar" onclick="bayar()">
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="kbl" class="col-md-2 col-form-label form-control-label">Kembalian</label>
+                        <div class="col-md-10">
+                          <input readonly class="form-control" type="number" name="kbl" id="kbl">
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  
+                  
+                </div>
+                
+              </div>
+        <div class="card">
+          <!-- Card header -->
+          <!-- {{ request.get_host }}{{ request.get_full_path }} -->
+          <div class="card-header">
+            <h3 class="mb-0">Status Pengerjaan Obat</h3>
+          </div>
+          <!-- Card body -->
+          <div class="card-body">
+              
+            <div class="form-group row">
+              <label for="example-text-input" class="col-md-2 col-form-label form-control-label">Status Pengerjaan</label>
+              <div class="col-md-10">
+                <select class="form-control" id="example-text-input" required name="statusapoteker">
+                    <option value="selesai">Selesai</option>
+                    <option value="proses">Dalam Proses</option>
+                  </select>
+                <!-- <input class="form-control" type="text" name="namapasien" maxlength="200" required placeholder="John Snow" id="example-text-input"> -->
+              </div>
+            </div>
+              
+              <button class="btn btn-primary" type="submit">Simpan</button>
+
+            </form>
+          </div>
+    </div>
+    <!-- Argon Scripts -->
+
+    {% endblock konten %}
+
+{% block script %}
+<script>
+  function bayar(){
+ k = document.getElementById("kbl");
+ b = document.getElementById("uang");
+ tot = {{total}};
+ 
+ 
+//  tot = parseInt(tot.value);
+ b = parseInt(b.value);
+ k.value = b - tot;
+}
+</script>
+<script src="{% static 'hal_admin/vendor/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'hal_admin/vendor/datatables.net-select/js/dataTables.select.min.js' %}"></script>
+<script src="{% static 'hal_admin/js/demo.min.js' %}"></script>
+
+
+
+{% endblock script %}

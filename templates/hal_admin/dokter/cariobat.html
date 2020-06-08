@@ -1,0 +1,25 @@
+{% if results|length %}
+	<table class="table table-striped text-white">
+	<tr>
+		<td colspan=3>
+		<strong>Ditemukan {{ results|length }} obat yang dicari</strong>
+		</td>
+	</tr>
+		<td><strong>Nama Obat</strong></td>
+		<td><strong>Stok yang ada</strong></td>
+		<td><strong>Aksi</strong></td>
+	</tr>
+	{% for r in results %}
+	<tr>
+		<td>{{ r.nama_obat }}</td>
+		<td>{{ r.stok_obat }}</td>
+		<td><input type="button" class="btn btn-warning" onclick="location.href='{% url 'dokter:tambah_obat' r.id  %}'" value=" Pilih Obat" />
+		</td>
+	</tr>
+	{% endfor %}
+	</table>
+{% else %}
+	<div class="note text-white">
+	Obat yang dicari tidak ada.
+	</div>
+{% endif %}

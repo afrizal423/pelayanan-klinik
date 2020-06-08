@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-title" content="Add to Home">
+	<title>Halaman Apoteker</title>	
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
+</head>
+<body>
+	<center>
+        <h1>List obat yang tersedia</h1>
+        <!-- <h3>Afrizal's Blog</h3> -->
+	</center>
+	<br/>
+    <br/>
+    
+	<div class="container">
+        <div>
+            <input type="button" class="btn btn-primary"onclick="location.href='{% url 'apoteker:tambah_obatnya' %}'" value="Tambah data" />
+            <input type="button" class="btn btn-danger"onclick="location.href='{% url 'akun:user_logout' %}'" value="Logout" />
+
+        </div>
+		<table id="example" class="table table-striped table-bordered" style="width:100%">
+			<thead>
+				<tr>			
+					<th>Nama Obat</th>
+					<th>Stok Obat</th>
+                    <th>Dosis Obat</th>
+                    <th>Harga Obat</th>
+                    <th>Aksi</th>
+				</tr>
+			</thead>
+			<tbody>
+                {% for obat in data %}
+				<tr>				
+					<td>{{obat.nama_obat}}</td>
+					<td>{{obat.stok_obat}}</td>
+					<td>{{obat.dosis_obat}}</td>
+                    <td>{{obat.harga_obat}}</td>
+                    <td>
+                        <input type="button" class="btn btn-outline-warning" onclick="location.href='{% url 'apoteker:edit_obatnya' obat.id  %}';" value=" Edit" />
+                        <a type="button" class="btn btn-outline-danger" href="{% url 'apoteker:hapus_obatnya' obat.id  %}" onclick="return confirm('Anda yakin mau menghapus data ini?');">Delete</a>
+                        <!-- <input type="button" class="btn btn-outline-danger" data-confirm="Are you sure to delete this item?" onclick="location.href='/hapusjenjang/{{data.id_pendidikan}}';" value=" Delete" /> -->
+                        
+                      </td>
+                </tr>
+                {% endfor %}
+			</tbody>
+		</table>
+    </div>
+   
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+    </script>
+</body>
+</html>

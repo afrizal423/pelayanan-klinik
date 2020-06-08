@@ -15,7 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url,include
+from pelayanan_klinik import views as pkl
+from django.views.static import serve 
+from django.conf import settings
+
+admin.site.site_header="Sistem Pelayanan Klinik"
+admin.site.site_title="AdminPortal | Sistem Pelayanan Klinik"
+admin.site.index_title="Selamat datang di Sistem Pelayanan Klinik"
+
 
 urlpatterns = [
+    path('',pkl.index,name='index_klinik'),
     path('admin/', admin.site.urls),
+    path('akun/', include('akun.urls',namespace="akun")),
+    path('pegawaiadmin/', include('pegawaiadmin.urls',namespace="pegawaiadmin")),
+    path('dokter/', include('dokter.urls',namespace="dokter")),
+    path('apoteker/', include('apoteker.urls',namespace="apoteker")),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_DIR}), 
+
 ]
