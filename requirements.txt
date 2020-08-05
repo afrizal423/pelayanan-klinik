@@ -6,3 +6,5 @@ django-extensions
 xhtml2pdf
 WeasyPrint
 django-jazzmin
+# uvicorn
+daphne
