@@ -127,5 +127,8 @@ python manage.py runserver
 <b>Jika error saat deploy</b> <br>
 [dikarenakan cairocffi](https://stackoverflow.com/questions/29596426/how-to-pip-install-cairocffi)
 
+<b>Jika ingin langsung download file</b> <br>
+[Download disini](https://github.com/afrizal423/pelayanan-klinik/archive/v1.2.zip)
+
 ## Demo <br>
-[Demo in here](https://klinik.dj.afrizalmy.com/)<br>
+[Demo in here](https://pelayanan-klinik.herokuapp.com/)<br>
