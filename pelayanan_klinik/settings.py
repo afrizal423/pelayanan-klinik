@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import pymysql
-pymysql.version_info = (1, 3, 13, "final", 0)
+import django_heroku
+pymysql.version_info = (1, 4, 0, "final", 0)
 pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -31,32 +32,43 @@ SECRET_KEY = '4g7%tvo&(llfqne)rsa269uj^lvpuu02o-(h8$zb2-oo-$k*7a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.7','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
-INSTALLED_APPS = [
-     # General use templates & template tags (should appear first)
-    'adminlte3',
-    # Optional: Django admin theme (must be before django.contrib.admin)
-    'adminlte3_theme',
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django_extensions',
+]
+
+THIRD_PARTY_APPS = [
+    # General use templates & template tags (should appear first)
+    # 'adminlte3',
+    # Optional: Django admin theme (must be before django.contrib.admin)
+    # 'adminlte3_theme',
+    'jazzmin',
+]
+
+LOCAL_APPS = [
     'akun',
     'apoteker',
     'dokter',
     'pegawaiadmin',
     'pasien',
-    # 'django_extensions',
-     
 ]
 
+INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + LOCAL_APPS
+
 MIDDLEWARE = [
+    # Simplified static file serving.
+    # https://warehouse.python.org/project/whitenoise/
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -65,6 +77,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'pelayanan_klinik.urls'
 
@@ -90,16 +104,24 @@ WSGI_APPLICATION = 'pelayanan_klinik.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#      'default': {
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': 'pelayanan_klinik',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': '127.0.0.1',   
+#         'PORT': '3306',
+#     }   
+# }
+
 DATABASES = {
-     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'pelayanan_klinik',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',   
-        'PORT': '3306',
-    }   
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
 
 
 # Password validation
@@ -141,8 +163,128 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [STATIC_DIR,]
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 LOGIN_URL = '/akun/login/'
+
+JAZZMIN_SETTINGS = {
+    # title of the window
+    'site_title': 'Halaman Admin Pelayanan Klinik',
+
+    # Title on the brand, and the login screen (19 chars max)
+    'site_header': 'Klinik Ndang Waras',
+
+    # square logo to use for your site, must be present in static files, used for favicon and brand on top left
+    'site_logo': 'polls/img/logo.png',
+
+    # Welcome text on the login screen
+    'welcome_sign': 'Welcome to Halaman Admin Pelayanan Klinik',
+
+    # Copyright on the footer
+    'copyright': 'Afrizal M Yasin',
+
+    # The model admin to search from the search bar, search bar omitted if excluded
+    'search_model': 'auth.User',
+
+    # Field name on user model that contains avatar image
+    'user_avatar': None,
+
+    ############
+    # Top Menu #
+    ############
+
+    # Links to put along the top menu
+    'topmenu_links': [
+
+        # Url that gets reversed (Permissions can be added)
+        {'name': 'Home',  'url': 'admin:index', 'permissions': ['auth.view_user']},
+
+        # external url that opens in a new window (Permissions can be added)
+        {'name': 'View Site', 'url': 'index_klinik', 'new_window': True},
+
+        # model admin to link to (Permissions checked against model)
+        {'model': 'auth.User'},
+
+        # App with dropdown menu to all its models pages (Permissions checked against models)
+        {'app': 'polls'},
+    ],
+
+    #############
+    # User Menu #
+    #############
+
+    # Additional links to include in the user menu on the top right ('app' url type is not allowed)
+    'usermenu_links': [
+        # {'name': 'Support', 'url': 'https://github.com/farridav/django-jazzmin/issues', 'new_window': True},
+        # {'name': 'Support', 'url': 'https://github.com/farridav/django-jazzmin/issues', 'new_window': True},
+        {'model': 'auth.user'}
+    ],
+
+    #############
+    # Side Menu #
+    #############
+
+    # Whether to display the side menu
+    'show_sidebar': True,
+
+    # Whether to aut expand the menu
+    'navigation_expanded': True,
+
+    # Hide these apps when generating side menu e.g (auth)
+    'hide_apps': [],
+
+    # Hide these models when generating side menu (e.g auth.user)
+    'hide_models': [],
+
+    # List of apps to base side menu ordering off of (does not need to contain all apps)
+    'order_with_respect_to': ['accounts', 'polls'],
+
+    # Custom links to append to app groups, keyed on app name
+    'custom_links': {
+        'polls': [{
+            'name': 'Make Messages', 
+            'url': 'make_messages', 
+            'icon': 'fa-comments',
+            'permissions': ['polls.view_poll']
+        }]
+    },
+
+    # Custom icons for side menu apps/models See https://www.fontawesomecheatsheet.com/font-awesome-cheatsheet-5x/
+    # for a list of icon classes
+    'icons': {
+        'auth': 'fa-users-cog',
+        'auth.user': 'fa-user',
+        'auth.Group': 'fa-users',
+    },
+    # Icons that are used when one is not manually specified
+    'default_icon_parents': 'fa-chevron-circle-right',
+    'default_icon_children': 'fa-circle',
+
+    #############
+    # UI Tweaks #
+    #############
+    # Relative paths to custom CSS/JS scripts (must be present in static files)
+    "custom_css": None,
+    "custom_js": None,
+    # Whether to show the UI customizer on the sidebar
+    "show_ui_builder": False,
+
+    ###############
+    # Change view #
+    ###############
+    # Render out the change view as a single form, or in tabs, current options are
+    # - single
+    # - horizontal_tabs (default)
+    # - vertical_tabs
+    # - collapsible
+    # - carousel
+    "changeform_format": "horizontal_tabs",
+    # override change forms on a per modeladmin basis
+    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs",},
+}
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())

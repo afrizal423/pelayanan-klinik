@@ -1,0 +1,1 @@
+web: gunicorn pelayanan_klinik.wsgi
