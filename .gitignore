@@ -8,3 +8,4 @@ pasien/migrations
 dokter/migrations
 apoteker/migrations
 akun/migrations
+.env
