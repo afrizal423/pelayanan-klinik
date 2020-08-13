@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import pymysql
+import django_heroku
 pymysql.version_info = (1, 4, 0, "final", 0)
 pymysql.install_as_MySQLdb()
 
@@ -31,7 +32,7 @@ SECRET_KEY = '4g7%tvo&(llfqne)rsa269uj^lvpuu02o-(h8$zb2-oo-$k*7a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.7','127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -98,16 +99,24 @@ WSGI_APPLICATION = 'pelayanan_klinik.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#      'default': {
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': 'pelayanan_klinik',
+#         'USER': 'root',
+#         'PASSWORD': '',
+#         'HOST': '127.0.0.1',   
+#         'PORT': '3306',
+#     }   
+# }
+
 DATABASES = {
-     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'pelayanan_klinik',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',   
-        'PORT': '3306',
-    }   
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
 
 
 # Password validation
@@ -149,7 +158,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [STATIC_DIR,]
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
@@ -270,3 +279,7 @@ JAZZMIN_SETTINGS = {
     # override change forms on a per modeladmin basis
     "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs",},
 }
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
