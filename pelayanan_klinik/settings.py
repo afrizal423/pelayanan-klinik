@@ -148,9 +148,9 @@ DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'pelayanan_klinik',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',   
+        'USER': 'user',
+        'PASSWORD': 'user',
+        'HOST': 'mysql',   
         'PORT': '3306',
     }   
 }

@@ -1,0 +1,56 @@
+version: '3'
+services:
+  mysql:
+    image: mariadb:10.4.14
+    container_name: dev_mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: pelayanan_klinik
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: dev_pma
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8183:80
+  web:
+    restart: always
+    container_name: dev_django
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    # command: /usr/local/bin/daphne pelayanan_klinik.asgi:application
+    volumes:
+      - ./code/static:/code/static
+    ports:
+      - "8000:8000"
+    links:
+      - mysql
+  nginx:
+    image: nginx:alpine
+    container_name: dev_nginx
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./code/static:/static
+    depends_on:
+      - web
+    ports:
+      - 80:80
+
+  # nginx:
+  #   restart: always
+  #   build: ./nginx/
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - .:/www/static
+  #   links:
+  #     - web
