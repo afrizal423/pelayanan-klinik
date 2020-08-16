@@ -29,6 +29,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     # command: /usr/local/bin/daphne pelayanan_klinik.asgi:application
     volumes:
+      - .:/code
       - ./code/static:/code/static
     ports:
       - "8000:8000"

@@ -3,6 +3,8 @@
 coba.py
 static/admin/
 static/admin-lte/
+static/adminlte/
+static/jazzmin/
 pegawaiadmin/migrations
 pasien/migrations
 dokter/migrations
