@@ -12,20 +12,29 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import pymysql
+######################
+# KONFIGURASI HEROKU #
+######################
 import django_heroku
 import dj_database_url
 import dotenv
-
+######################
 pymysql.version_info = (1, 4, 0, "final", 0)
 pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+######################
+# KONFIGURASI HEROKU #
+######################
+
 # This is new:
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
+# dotenv_file = os.path.join(BASE_DIR, ".env")
+# if os.path.isfile(dotenv_file):
+#     dotenv.load_dotenv(dotenv_file)
+
+#######################
 
 TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 STATIC_DIR = os.path.join(BASE_DIR,'static')
@@ -74,10 +83,14 @@ LOCAL_APPS = [
 INSTALLED_APPS = THIRD_PARTY_APPS + DJANGO_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    'django.middleware.security.SecurityMiddleware', 
     # Simplified static file serving.
     # https://warehouse.python.org/project/whitenoise/
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    ######################
+    # KONFIGURASI HEROKU #
+    ######################
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    ######################
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -85,8 +98,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+######################
+# KONFIGURASI HEROKU #
+######################
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+######################
 
 ROOT_URLCONF = 'pelayanan_klinik.urls'
 
@@ -106,22 +122,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pelayanan_klinik.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-# DATABASES = {
-#      'default': {
-#         'ENGINE': 'django.db.backends.mysql', 
-#         'NAME': 'pelayanan_klinik',
-#         'USER': 'root',
-#         'PASSWORD': '',
-#         'HOST': '127.0.0.1',   
-#         'PORT': '3306',
-#     }   
-# }
+######################
+# KONFIGURASI HEROKU #
+######################
 
 # DATABASES = {
 #     'default': {
@@ -130,9 +133,27 @@ WSGI_APPLICATION = 'pelayanan_klinik.wsgi.application'
 #     }
 # }
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+# DATABASES = {}
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
+######################
+
+WSGI_APPLICATION = 'pelayanan_klinik.wsgi.application'
+
+
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
+DATABASES = {
+     'default': {
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'pelayanan_klinik',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',   
+        'PORT': '3306',
+    }   
+}
 
 
 # Password validation
@@ -174,7 +195,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+######################
+# KONFIGURASI HEROKU #
+######################
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+######################
 STATICFILES_DIRS = [STATIC_DIR,]
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
@@ -296,12 +321,14 @@ JAZZMIN_SETTINGS = {
     "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs",},
 }
 
+######################
+# KONFIGURASI HEROKU #
+######################
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
-
-
+# django_heroku.settings(locals())
 
 # This is new
-options = DATABASES['default'].get('OPTIONS', {})
-options.pop('sslmode', None)
+# options = DATABASES['default'].get('OPTIONS', {})
+# options.pop('sslmode', None)
+######################
