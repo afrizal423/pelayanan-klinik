@@ -26,11 +26,11 @@ services:
     restart: always
     container_name: klinik_django
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    # command: /usr/local/bin/daphne pelayanan_klinik.asgi:application
+    # command: python manage.py runserver 0.0.0.0:8000
+    command: bash -c "daphne -b 0.0.0.0 -p 8000 pelayanan_klinik.asgi:application"
     volumes:
       - .:/code
-      - ./code/static:/code/static
+      - ./static:/code/static
     ports:
       - "8000:8000"
     links:
@@ -40,7 +40,7 @@ services:
     container_name: klinik_nginx
     volumes:
       - ./nginx:/etc/nginx/conf.d
-      - ./code/static:/static
+      - ./static:/code/static
     depends_on:
       - web
     ports:
