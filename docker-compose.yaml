@@ -2,7 +2,7 @@ version: '3'
 services:
   mysql:
     image: mariadb:10.4.14
-    container_name: dev_mysql
+    container_name: klinik_mysql
     ports:
       - "3306:3306"
     environment:
@@ -12,7 +12,7 @@ services:
       MYSQL_DATABASE: pelayanan_klinik
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: dev_pma
+    container_name: klinik_pma
     links:
       - mysql
     environment:
@@ -24,7 +24,7 @@ services:
       - 8183:80
   web:
     restart: always
-    container_name: dev_django
+    container_name: klinik_django
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     # command: /usr/local/bin/daphne pelayanan_klinik.asgi:application
@@ -37,7 +37,7 @@ services:
       - mysql
   nginx:
     image: nginx:alpine
-    container_name: dev_nginx
+    container_name: klinik_nginx
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - ./code/static:/static

@@ -5,6 +5,7 @@ static/admin/
 static/admin-lte/
 static/adminlte/
 static/jazzmin/
+code/*
 pegawaiadmin/migrations
 pasien/migrations
 dokter/migrations
