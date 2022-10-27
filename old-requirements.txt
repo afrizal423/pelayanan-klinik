@@ -8,3 +8,4 @@ WeasyPrint
 django-jazzmin
 # uvicorn
 daphne
+twisted>=22.10.0rc1 # not directly required, pinned by Snyk to avoid a vulnerability
