@@ -35,7 +35,7 @@ lockfile==0.12.2
 msgpack==0.6.2
 packaging==20.3
 pep517==0.8.2
-Pillow==9.0.0
+Pillow==9.0.1
 # pkg-resources==0.0.0
 progress==1.5
 psycopg2==2.8.5
@@ -58,7 +58,7 @@ service-identity==18.1.0
 six==1.14.0
 sqlparse==0.4.2
 tinycss2==1.0.2
-Twisted==20.3.0
+Twisted==22.10.0rc1
 txaio==20.4.1
 urllib3==1.26.5
 WeasyPrint==51
